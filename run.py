@@ -9,3 +9,16 @@ print("Admiral", Username, ",your fleet is in position and awaiting your command
 
 # Gameboard key
 print("Key:", "\n", "H = Hit", "\n", "M = Miss", "\n", "D = Destroyed", "\n")
+
+# Opponent Gameboad
+
+opponent_board = []
+
+print("\n", "    0  1  2  3  4  5  ", "\n")
+for x in range(6):
+    grid_rows = ""
+    for y in range(6):
+        space = " _ "
+    print(x," "," _ "*6)
+
+#cpu_board(opponent_board)
