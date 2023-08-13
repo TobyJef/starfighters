@@ -85,7 +85,7 @@ def player_move(shot_record):
         except:
             print("Please re-enter new co-ordinates")
         
-        return player_turn
+    return player_turn
 
 # Opponent Gameboad
 # Creates opponent Gameboard
