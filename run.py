@@ -95,7 +95,7 @@ def opponent_board(hit,miss,destroyed):
     Creates a 6x6 grid displaying 0-5 along both x & y axis
         
     """
-    print("\n", "    0  1  2  3  4  5  ", "\n")
+    print("\n", "    A  B  C  D  E  F  ", "\n")
 
     # Player shot counter
     player_shot = 0
@@ -103,6 +103,9 @@ def opponent_board(hit,miss,destroyed):
         grid_rows = ""
         for y in range(6):
             grid_space = " _ "
+            """    
+            #Hit, Miss, Destroyed markers
+            """
             if player_shot in miss:
                 grid_space = " M "
             elif player_shot in hit:
@@ -115,6 +118,8 @@ def opponent_board(hit,miss,destroyed):
         print(x," ",grid_rows)
 
 #enemy_ships,filled_space = place_enemies()
+
+# Function to check if shot on enemy ship has hit,miss,destroyed
 
 def check_move(player_turn,enemy_ship1,hit,miss,destroyed):
 
@@ -133,13 +138,21 @@ def check_move(player_turn,enemy_ship1,hit,miss,destroyed):
 
 enemy_ship1 = [15,16]
 
+#enemy_ship2 = []
+#enemy_ship3 = []
+#enemy_ship4 = []
+#enemy_ship5 = []
+#enemy_ship6 = []
+
 # Hit and Miss testing area
 hit = []
 miss = []
 destroyed = []
 
 # Function calling area
-for i in range(10):
+
+# Player move limit. Test at 99.
+for i in range(99):
 
     # Function to check for duplicate player shots
     shot_record = hit + miss + destroyed
@@ -153,4 +166,5 @@ for i in range(10):
     # Function calling Opponent Gameboard
     opponent_board(hit,miss,destroyed)
 
+print ("End of test")
 
