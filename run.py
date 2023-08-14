@@ -18,11 +18,14 @@ Number of enemy starfighters compiled into the arrary enemy_fleet
 enemy_spawn to check for instances of already taken grid space
 
 """
-def check_placement(fighter):
+def check_placement(fighter,space_filled):
 
     for i in range(len(fighter)):
         num = fighter[i]
-        if num < 0 or num > 99:
+        if num in space_filled:
+            fighter = [-1]
+            break
+        elif num < 0 or num > 99:
             fighter = [-1]
             break
         elif num % 9 == 0 and i < len(fighter) -1:
@@ -32,36 +35,42 @@ def check_placement(fighter):
 
     return fighter
 
-def check_enemy(enemy, placement, heading):
- #enemy_spawn = []
- #enemy_fleet = []
+# Function to determine random placement and heading of enemy ships within grid size
+
+def check_enemy(enemy, placement, heading, space_filled):
+
     heading = 4
     fighter = []
+    # head of fighter heading North
     if heading == 1:
         for i in range(enemy):
             fighter.append(placement + i*10)
-            fighter = check_placement(fighter)
+            fighter = check_placement(fighter,space_filled)
             print(placement + i*10)
+    # head of fighter heading East
     elif heading == 2:
         for i in range(enemy):
             fighter.append(placement - i)
-            fighter = check_placement(fighter)
+            fighter = check_placement(fighter,space_filled)
             print(placement - i)
+    #head of fighter heading South
     elif heading == 3:
         for i in range(enemy):
             fighter.append(placement - i*10)
-            fighter = check_placement(fighter)
+            fighter = check_placement(fighter,space_filled)
             print(placement - i*10)
+    #head of fighter heading West
     elif heading == 4  :
         for i in range(enemy):
             fighter.append(placement + i)
-            fighter = check_placement(fighter)
+            fighter = check_placement(fighter,space_filled)
             print(placement + i)
     return fighter
 
-
+space_filled = []
 enemy_fleet = []
 enemy_fighters = [5, 3, 3, 2, 1, 1]
+
 for enemy in enemy_fighters:
     fighter = [-1]
     while fighter[0] == -1:
@@ -71,16 +80,11 @@ for enemy in enemy_fighters:
         enemy_heading = randrange(1,4)
 
         print(enemy, enemy_start, enemy_heading)
-        fighter = check_enemy(enemy, enemy_start, enemy_heading)
-
-enemy_fleet.append(fighter)
-print (enemy_fleet)
-
-# enemy_fighter = check_opponent(opponent,opponent_fighter,enemy_spawn)
-
-# enemy_fleet.append(opponent_fighters)
-# enemy_spawn = enemy_spawn + enemy_fighter
-# print(enemy_fleet)
+        fighter = check_enemy(enemy, enemy_start, enemy_heading, space_filled)
+    
+    enemy_fleet.append(fighter)
+    space_filled = space_filled + fighter
+    print (enemy_fleet)
 
 # return enemy_fleet,enemy_spawn
 
