@@ -121,7 +121,7 @@ def opponent_board(hit,miss,destroyed):
 
 # Function to check if shot on enemy ship has hit,miss,destroyed
 
-def check_move(player_turn,enemy_ship1,hit,miss,destroyed):
+def check_move(player_turn,enemy_ship1,enemy_ship2,hit,miss,destroyed):
 
     if player_turn in enemy_ship1:
         enemy_ship1.remove(player_turn)
@@ -129,16 +129,22 @@ def check_move(player_turn,enemy_ship1,hit,miss,destroyed):
             hit.append(player_turn)
         else:
             destroyed.append(player_turn)
+    elif player_turn in enemy_ship2:
+        enemy_ship2.remove(player_turn)
+        if len(enemy_ship2) > 0:
+            hit.append(player_turn)
+        else:
+            destroyed.append(player_turn)
     else:
         miss.append(player_turn)
 
-    return enemy_ship1,hit,miss,destroyed
+    return enemy_ship1,enemy_ship2,hit,miss,destroyed
 
 # Starship placement testing
 
 enemy_ship1 = [15,16]
+enemy_ship2 = [1,7]
 
-#enemy_ship2 = []
 #enemy_ship3 = []
 #enemy_ship4 = []
 #enemy_ship5 = []
@@ -161,10 +167,15 @@ for i in range(99):
     player_turn = player_move(shot_record)
 
     # Function to check players move
-    enemy_ship1,hit,miss,destroyed = check_move(player_turn,enemy_ship1,hit,miss,destroyed)
+    enemy_ship1,enemy_ship2,hit,miss,destroyed = check_move(player_turn,enemy_ship1,enemy_ship2,hit,miss,destroyed)
 
     # Function calling Opponent Gameboard
     opponent_board(hit,miss,destroyed)
+
+
+    if len(enemy_ship1) < 1 and len(enemy_ship2) < 1:
+        print("Enemy ship destroyed")
+        break
 
 print ("End of test")
 
