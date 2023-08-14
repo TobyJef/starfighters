@@ -3,18 +3,6 @@ from random import randrange
 
 # Functions to check placement of enemy starfighters
 """
-def check_placement(enemy_fighter,enemy_spawn):
-
-    for i in range(len(enemy_fighter)):
-        num = enemy_fighter[i]
-        if num in enemy_spawn:
-            enemy_fighter = [-1]
-            break
-        if num < 0 or num > 99:
-            enemy_fighter = [-1]
-            break
-                   
-    return enemy_fighter
 
 def check_opponent(opponent,opponent_fighter,enemy_spawn):
 
@@ -30,30 +18,63 @@ Number of enemy starfighters compiled into the arrary enemy_fleet
 enemy_spawn to check for instances of already taken grid space
 
 """
+def check_placement(fighter):
+
+    for i in range(len(fighter)):
+        num = fighter[i]
+        if num < 0 or num > 99:
+            fighter = [-1]
+            break
+        elif num % 9 == 0 and i < len(fighter) -1:
+           if fighter[i+1] % 10 == 0:
+                fighter = [-1]
+                break
+
+    return fighter
 
 def check_enemy(enemy, placement, heading):
  #enemy_spawn = []
  #enemy_fleet = []
+    heading = 4
     fighter = []
     if heading == 1:
         for i in range(enemy):
+            fighter.append(placement + i*10)
+            fighter = check_placement(fighter)
+            print(placement + i*10)
+    elif heading == 2:
+        for i in range(enemy):
+            fighter.append(placement - i)
+            fighter = check_placement(fighter)
+            print(placement - i)
+    elif heading == 3:
+        for i in range(enemy):
             fighter.append(placement - i*10)
+            fighter = check_placement(fighter)
             print(placement - i*10)
+    elif heading == 4  :
+        for i in range(enemy):
+            fighter.append(placement + i)
+            fighter = check_placement(fighter)
+            print(placement + i)
+    return fighter
 
 
-
-
+enemy_fleet = []
 enemy_fighters = [5, 3, 3, 2, 1, 1]
 for enemy in enemy_fighters:
-    # enemy_fighter = [-1]
-    # while enemy_fighter[0] == -1:
+    fighter = [-1]
+    while fighter[0] == -1:
     # Places Starfighter opponents at random
 
-    enemy_start = randrange(99)
-    enemy_heading = randrange(1,4)
+        enemy_start = randrange(99)
+        enemy_heading = randrange(1,4)
 
-    print(enemy, enemy_start, enemy_heading)
-    check_enemy(enemy, enemy_start, enemy_heading)
+        print(enemy, enemy_start, enemy_heading)
+        fighter = check_enemy(enemy, enemy_start, enemy_heading)
+
+enemy_fleet.append(fighter)
+print (enemy_fleet)
 
 # enemy_fighter = check_opponent(opponent,opponent_fighter,enemy_spawn)
 
