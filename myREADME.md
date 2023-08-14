@@ -75,5 +75,7 @@ Validation
 
 Deployement
 
+- Create or Sign in to your Heroku account.
+
 
 Credits

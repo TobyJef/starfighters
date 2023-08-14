@@ -107,7 +107,7 @@ def opponent_board(space_filled):
         for y in range(10):
             grid_space = " _ "
             """
-# Hit, Miss, Destroyed markers
+# Enemy Boat markers for testing
 """
             if player_shot in space_filled:
                 grid_space = " O "
@@ -193,7 +193,7 @@ for i in range(60):
 print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
 
 # Player name entry
-Username = input("Please enter your name: ")
+Username = input("Please enter your name: \n")
 print("\n")
 print("Welcome, Admiral", Username, "\n")
 print("Admiral", Username,",your fleet is in position and awaiting your command.","\n" * 2,)
@@ -218,7 +218,7 @@ def player_move(shot_record):
     on_target = "no"
     while on_target == "no":
         try:
-            player_turn = input("Admiral, Enter your shot co-ordinates: ")
+            player_turn = input("Admiral, Enter your shot co-ordinates: \n")
             player_turn = int(player_turn)
             if player_turn < 0 or player_turn > 99:
                 print("Sorry Admiral, We cannot fire there")
