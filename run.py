@@ -110,7 +110,7 @@ def opponent_board(hit,miss,destroyed):
                 grid_space = " M "
             elif player_shot in hit:
                 grid_space = " H "
-            elif player_turn in destroyed:
+            elif player_shot in destroyed:
                 grid_space = " D "
 
             grid_rows = grid_rows + grid_space
