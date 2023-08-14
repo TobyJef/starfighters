@@ -1,7 +1,7 @@
 # Used for random number generation
 from random import randrange
 
-# Functions to check placement of enemy starfighters 
+# Functions to check placement of enemy starfighters
 """
 def check_placement(enemy_fighter,enemy_spawn):
 
@@ -10,7 +10,7 @@ def check_placement(enemy_fighter,enemy_spawn):
         if num in enemy_spawn:
             enemy_fighter = [-1]
             break
-        if num < 0 or num > 35:
+        if num < 0 or num > 99:
             enemy_fighter = [-1]
             break
                    
@@ -30,29 +30,42 @@ Number of enemy starfighters compiled into the arrary enemy_fleet
 enemy_spawn to check for instances of already taken grid space
 
 """
+
+def check_enemy(enemy, placement, heading):
+ #enemy_spawn = []
+ #enemy_fleet = []
+    fighter = []
+    if heading == 1:
+        for i in range(enemy):
+            fighter.append(placement - i*10)
+            print(placement - i*10)
+
+
+
+
+enemy_fighters = [5, 3, 3, 2, 1, 1]
+for enemy in enemy_fighters:
+    # enemy_fighter = [-1]
+    # while enemy_fighter[0] == -1:
+    # Places Starfighter opponents at random
+
+    enemy_start = randrange(99)
+    enemy_heading = randrange(1,4)
+
+    print(enemy, enemy_start, enemy_heading)
+    check_enemy(enemy, enemy_start, enemy_heading)
+
+# enemy_fighter = check_opponent(opponent,opponent_fighter,enemy_spawn)
+
+# enemy_fleet.append(opponent_fighters)
+# enemy_spawn = enemy_spawn + enemy_fighter
+# print(enemy_fleet)
+
+# return enemy_fleet,enemy_spawn
+
+# opponent_fighter, enemy_spawn = create_enemy()
+
 """
-def create_enemy():
-    enemy_spawn = []
-    enemy_fleet = []
-    opponent_fighters = [1,1,1,1,1,1]
-    for opponent in opponent_fighters:
-        enemy_fighter = [-1]
-        while enemy_fighter[0] == -1:
-            # Places Starfighter opponents at random
-            opponent_fighter = randrange(35)
-            print(opponent,opponent_fighter)
-            
-            enemy_fighter = check_opponent(opponent,opponent_fighter,enemy_spawn)
-
-        enemy_fleet.append(opponent_fighters)
-        enemy_spawn = enemy_spawn + enemy_fighter
-        print(enemy_fleet)
-
-    return enemy_fleet,enemy_spawn
-
-opponent_fighter, enemy_spawn = create_enemy()
-"""
-
 
 # Opening message to the player
 print("\n", "  ", "*"*3, "Welcome to Starfighters", "*"*3, "\n")
@@ -75,7 +88,7 @@ def player_move(shot_record):
         try:
             player_turn = input("Admiral, Enter your shot co-ordinates: ")
             player_turn = int(player_turn)
-            if player_turn < 0 or player_turn > 35:
+            if player_turn < 0 or player_turn > 99:
                 print("Sorry Admiral, We cannot fire there")
             elif player_turn in shot_record:
                 print("We have already used those co-ordinates. Try again")
@@ -90,22 +103,23 @@ def player_move(shot_record):
 # Opponent Gameboad
 # Creates opponent Gameboard
 def opponent_board(hit,miss,destroyed):
-    
     """
-    Creates a 6x6 grid displaying 0-5 along both x & y axis
-        
-    """
-    print("\n", "    A  B  C  D  E  F  ", "\n")
+
+# Creates a 10x10 grid displaying 0-9 along both x & y axis
+
+
+"""
+    print("\n", "    0  1  2  3  4  5  6  7  8  9 ", "\n")
 
     # Player shot counter
     player_shot = 0
-    for x in range(6):
+    for x in range(10):
         grid_rows = ""
-        for y in range(6):
+        for y in range(10):
             grid_space = " _ "
-            """    
-            #Hit, Miss, Destroyed markers
             """
+# Hit, Miss, Destroyed markers
+"""
             if player_shot in miss:
                 grid_space = " M "
             elif player_shot in hit:
@@ -179,3 +193,4 @@ for i in range(99):
 
 print ("End of test")
 
+"""
