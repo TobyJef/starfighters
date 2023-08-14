@@ -177,7 +177,8 @@ shot_record = []
 enemy_fleet, space_filled = place_enemies()
 opponent_board(space_filled)
 
-for i in range(5):
+# Test ran at continuos shots
+for i in range(60):
     player_turn, shot_record = computer_move(shot_record)
     enemy_fleet,hit,miss,destroyed = check_move(player_turn,enemy_fleet,hit,miss,destroyed)
     player_board(hit,miss,destroyed)

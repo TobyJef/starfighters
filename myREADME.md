@@ -29,7 +29,7 @@ Due to different publications found of the game Battleships found around the wor
 
 In my version Starfighters, the classic Naval game has been given a sci-fi twist, with a brief backstory and mission briefing to transport the player and game into the cosmos. 
 
-A 6x6 grid size is being used for the players and the opponents ship placements. With the same basic rules of the game apply, find and destroy the entire enemy fleet, before they to destroy yours. Both sets of Starfighters are placed on the grids at random. 
+A 10x10 grid size is being used for the players and the opponents ship placements. With the same basic rules of the game apply, find and destroy the entire enemy fleet, before they to destroy yours. Both sets of Starfighters are placed on the grids at random. 
 
 - Features
 
@@ -43,7 +43,7 @@ It would be my intention in a future update to add a 10x10 grid. As discussed fu
 
 - Future Improvements:
 
-The ability for the player to choose between the game standard 6x6 or a larger 10x10 grid size.
+The ability for the player to choose between the game standard 10x10 or a smaller 6x6 grid size.
 
 The ability for the player to set their own starfighter positions on their tactical grid.
 
