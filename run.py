@@ -2,20 +2,9 @@
 from random import randrange
 
 # Functions to check placement of enemy starfighters
-"""
 
-def check_opponent(opponent,opponent_fighter,enemy_spawn):
-
-    enemy_fighter = []
-    for i in range(opponent):
-            enemy_fighter.append(opponent_fighter + i)
-            enemy_fighter = check_placement(enemy_fighter)
-            return opponent_fighter + i
 """
-"""
-Number of enemy starfighters compiled into the arrary enemy_fleet
-
-enemy_spawn to check for instances of already taken grid space
+Function to place enemy starfighters within the game board
 
 """
 def check_placement(fighter,space_filled):
@@ -28,7 +17,7 @@ def check_placement(fighter,space_filled):
         elif num < 0 or num > 99:
             fighter = [-1]
             break
-        elif num % 9 == 0 and i < len(fighter) -1:
+        elif num % 10 == 9 and i < len(fighter) -1:
            if fighter[i+1] % 10 == 0:
                 fighter = [-1]
                 break
@@ -44,51 +33,156 @@ def check_enemy(enemy, placement, heading, space_filled):
     # head of fighter heading North
     if heading == 1:
         for i in range(enemy):
-            fighter.append(placement + i*10)
-            fighter = check_placement(fighter,space_filled)
-            print(placement + i*10)
-    # head of fighter heading East
-    elif heading == 2:
-        for i in range(enemy):
-            fighter.append(placement - i)
-            fighter = check_placement(fighter,space_filled)
-            print(placement - i)
-    #head of fighter heading South
-    elif heading == 3:
-        for i in range(enemy):
             fighter.append(placement - i*10)
             fighter = check_placement(fighter,space_filled)
             print(placement - i*10)
-    #head of fighter heading West
-    elif heading == 4  :
+    # head of fighter heading East
+    elif heading == 2:
         for i in range(enemy):
             fighter.append(placement + i)
             fighter = check_placement(fighter,space_filled)
             print(placement + i)
+    #head of fighter heading South
+    elif heading == 3:
+        for i in range(enemy):
+            fighter.append(placement + i*10)
+            fighter = check_placement(fighter,space_filled)
+            print(placement + i*10)
+    #head of fighter heading West
+    elif heading == 4  :
+        for i in range(enemy):
+            fighter.append(placement - i)
+            fighter = check_placement(fighter,space_filled)
+            print(placement - i)
     return fighter
 
-space_filled = []
-enemy_fleet = []
-enemy_fighters = [5, 3, 3, 2, 1, 1]
+"""
+Function to place enemy starfighters at random.
+While not sharing the same grid space,
+or spilling out of the game board
 
-for enemy in enemy_fighters:
-    fighter = [-1]
-    while fighter[0] == -1:
-    # Places Starfighter opponents at random
+"""
 
-        enemy_start = randrange(99)
-        enemy_heading = randrange(1,4)
+def place_enemies ():
 
-        print(enemy, enemy_start, enemy_heading)
-        fighter = check_enemy(enemy, enemy_start, enemy_heading, space_filled)
-    
-    enemy_fleet.append(fighter)
-    space_filled = space_filled + fighter
-    print (enemy_fleet)
+    space_filled = []
+    enemy_fleet = []
+    enemy_fighters = [5, 3, 3, 2, 1, 1]
 
-# return enemy_fleet,enemy_spawn
+    for enemy in enemy_fighters:
+        fighter = [-1]
+        while fighter[0] == -1:
 
-# opponent_fighter, enemy_spawn = create_enemy()
+        # Places enemy Starfighter at random
+
+            enemy_start = randrange(99)
+            enemy_heading = randrange(1,4)
+
+            print(enemy, enemy_start, enemy_heading)
+            fighter = check_enemy(enemy, enemy_start, enemy_heading, space_filled)
+        
+        enemy_fleet.append(fighter)
+        space_filled = space_filled + fighter
+        print (enemy_fleet)
+
+    return enemy_fleet, space_filled
+
+# Opponent Gameboad
+# Creates opponent Gameboard
+def opponent_board(space_filled):
+    """
+
+# Creates a 10x10 grid displaying 0-9 along both x & y axis
+
+
+"""
+    print("\n", "    0  1  2  3  4  5  6  7  8  9 ", "\n")
+
+    # Player shot counter
+    player_shot = 0
+    for x in range(10):
+        grid_rows = ""
+        for y in range(10):
+            grid_space = " _ "
+            """
+# Hit, Miss, Destroyed markers
+"""
+            if player_shot in space_filled:
+                grid_space = " O "
+
+
+            grid_rows = grid_rows + grid_space
+            player_shot = player_shot + 1
+        print(x," ",grid_rows)
+
+def computer_move(shot_record):
+
+    on_target = "no"
+    while on_target == "no":
+        try:
+            player_turn = randrange(99)
+            if player_turn not in shot_record:
+                on_target = "yes"
+                shot_record.append (player_turn)
+                break
+        except:
+            print("Please re-enter new co-ordinates")
+        
+    return player_turn, shot_record
+
+def player_board(hit,miss,destroyed):
+    print("\n", "    0  1  2  3  4  5  6  7  8  9 ", "\n")
+
+    # Player shot counter
+    player_shot = 0
+    for x in range(10):
+        grid_rows = ""
+        for y in range(10):
+            grid_space = " _ "
+            """
+# Hit, Miss, Destroyed markers
+"""
+            if player_shot in miss:
+                grid_space = " M "
+            elif player_shot in hit:
+                grid_space = " H "
+            elif player_shot in destroyed:
+                grid_space = " D "
+
+            grid_rows = grid_rows + grid_space
+            player_shot = player_shot + 1
+        print(x," ",grid_rows)
+
+def check_move(player_turn,enemy_fleet,hit,miss,destroyed):
+
+    for
+    if player_turn in enemy_ship1:
+        enemy_ship1.remove(player_turn)
+        if len(enemy_ship1) > 0:
+            hit.append(player_turn)
+        else:
+            destroyed.append(player_turn)
+    elif player_turn in enemy_ship2:
+        enemy_ship2.remove(player_turn)
+        if len(enemy_ship2) > 0:
+            hit.append(player_turn)
+        else:
+            destroyed.append(player_turn)
+    else:
+        miss.append(player_turn)
+
+    return enemy_fleet,hit,miss,destroyed
+
+hit = []
+miss = []
+destroyed = []
+shot_record = []
+
+enemy_fleet, space_filled = place_enemies()
+opponent_board(space_filled)
+player_turn, shot_record = computer_move(shot_record)
+enemy_fleet,hit,miss,destroyed = check_move(player_turn,enemy_fleet,hit,miss,destroyed)
+player_board(hit,miss,destroyed)
 
 """
 
@@ -125,9 +219,9 @@ def player_move(shot_record):
         
     return player_turn
 
-# Opponent Gameboad
-# Creates opponent Gameboard
-def opponent_board(hit,miss,destroyed):
+# Player Gameboard
+# Creates player Gameboard
+def player_board(hit,miss,destroyed):
     """
 
 # Creates a 10x10 grid displaying 0-9 along both x & y axis
@@ -208,8 +302,8 @@ for i in range(99):
     # Function to check players move
     enemy_ship1,enemy_ship2,hit,miss,destroyed = check_move(player_turn,enemy_ship1,enemy_ship2,hit,miss,destroyed)
 
-    # Function calling Opponent Gameboard
-    opponent_board(hit,miss,destroyed)
+    # Function calling Player Gameboard
+    player_board(hit,miss,destroyed)
 
 
     if len(enemy_ship1) < 1 and len(enemy_ship2) < 1:
