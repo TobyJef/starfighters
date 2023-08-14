@@ -155,20 +155,16 @@ def player_board(hit,miss,destroyed):
 
 def check_move(player_turn,enemy_fleet,hit,miss,destroyed):
 
-    for
-    if player_turn in enemy_ship1:
-        enemy_ship1.remove(player_turn)
-        if len(enemy_ship1) > 0:
-            hit.append(player_turn)
-        else:
-            destroyed.append(player_turn)
-    elif player_turn in enemy_ship2:
-        enemy_ship2.remove(player_turn)
-        if len(enemy_ship2) > 0:
-            hit.append(player_turn)
-        else:
-            destroyed.append(player_turn)
-    else:
+    computer_miss = 1
+    for i in range(len(enemy_fleet)):
+        if player_turn in enemy_fleet[i]:
+            enemy_fleet[i].remove(player_turn)
+            computer_miss = 0
+            if len(enemy_fleet[i]) > 0:
+                hit.append(player_turn)
+            else:
+                destroyed.append(player_turn)
+    if computer_miss == 1:
         miss.append(player_turn)
 
     return enemy_fleet,hit,miss,destroyed
@@ -180,9 +176,11 @@ shot_record = []
 
 enemy_fleet, space_filled = place_enemies()
 opponent_board(space_filled)
-player_turn, shot_record = computer_move(shot_record)
-enemy_fleet,hit,miss,destroyed = check_move(player_turn,enemy_fleet,hit,miss,destroyed)
-player_board(hit,miss,destroyed)
+
+for i in range(5):
+    player_turn, shot_record = computer_move(shot_record)
+    enemy_fleet,hit,miss,destroyed = check_move(player_turn,enemy_fleet,hit,miss,destroyed)
+    player_board(hit,miss,destroyed)
 
 """
 
