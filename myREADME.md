@@ -73,17 +73,52 @@ Validation
 
 
 
-Deployement
+- Deployement
 
-- Create or Sign in to your Heroku account.
+Ensure all relevant packages for project are installed, and make any final commits and push the update through to Github.
+
+Create or Sign in to your Heroku account.
+
+Click on the Create App option and give your App a name for your deployment, then selcet your region from the provided drop down box. As App names need to be unique, there maybe a possibility that your preferred name may already be taken. If that is the case, take a moment to think of a new name.
+
+Whilst on the main project page, there are a extra steps to take on the Heroku platform before we can deploy our app. Which can be done by going to the settings tab. 
+
+Underneath App Information, you will find Config Vars.
+
+Click on the reveal Config Vars button, within the KEY box, add PORT and then add 8000 to the VALUE box. Then click add.
+This is done to due to a warning found on the Deploying our Project Part 2, video page. As it was found by not adding this there was a possibility that the deployment may fail.
+
+# Add the config-vars image.
+
+Afterwards we need to turn our attention to installing some buildpacks we need to run our app outside of the requirements.txt file. First we want to install the python buildpack, followed by the node.js buildpack, then click the add buildpack button.
+
+# Add the buildpacks image
+
+Once the buildpacks have been added, scroll back to the top of the page and head over to the deployment page, by clicking on the Deploy tab.
+
+Within the Deployment Method, we will select Github as our deployment method by clicking on the Github option, then click the Connect to Github button below. This will connect to our Github repository and allow us to proceed to the next step.
+
+Below we will find the App connected to GitHub section. Enter the name of the project repository in the search bar and click the search button. Once the project's repository is found, we can then click the connect button to link our Heroku app with the code found in the Github project repository.
+
+Afterwards proceed to scroll down the page and choose if would prefer Automatic or Manual Deployment. We select automatic so that any further Git commit and push's on the project can be automatically deployed.
+
+Finally below at the end of the page we have reached the Manual Deploy section where we click on the Deploy Branch button so that we can initiate our apps deployment.
 
 
-Credits
 
-- Mentor Graeme
+
+
+
+
+- Credits
+
+- Mentor Graeme Taylor
+
 After speaking with Graeme when discussing the progress on this project and inspecting my code, 
 
-- Sean from Tutor Support. I reached out to Tutor Support after I attempted to deploy this project on Heroku.
+- Sean from Tutor Support.
+
+ I reached out to Tutor Support after I attempted to deploy this project on Heroku.
 Whilst following through the Deploying our Project, Part 1 video from the Love Sandwiches Walkthrough project,
 upon my first attempt at deployment, the deployment failed due to the below error:
 
