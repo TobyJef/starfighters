@@ -1,15 +1,33 @@
 # Used for random number generation
 from random import randrange
 
+# Opening message to the player
+print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
+
+# Player name entry
+Username = input("Please enter your name: \n")
+print("\n")
+print("Welcome, Admiral", Username, "\n")
+print("Admiral", Username,",your fleet is in position and awaiting your command.","\n" * 2,)
+
+# Gameboard key
+print("Key:", "\n", "H = Hit", "\n", "M = Miss", "\n", "D = Destroyed", "* = Starfighter","\n")
+
 # Lists to hold a 6x6 gameboard for the player and computer
 
-player_board = [[' ' for _ in range(6)] for _ in range (6)]
-computer_board = [[' ' for _ in range(6)] for _ in range (6)]
+game_board1 = [[' ' for _ in range(6)] for _ in range (6)]
+game_board2 = [[' ' for _ in range(6)] for _ in range (6)]
 
 # Gameboard X & Y axis display
 
 x_axis = ['1', '2', '3', '4', '5', '6']
 y_axis = ['A', 'B', 'C', 'D', 'E', 'F']
+
+# Function to create the players gameboard
+
+def player_board()
+
+
 
 
 
@@ -54,19 +72,6 @@ def check_enemy(enemy, placement, heading, space_filled):
             fighter.append(placement + i)
             fighter = check_placement(fighter, space_filled)
             print(placement + i)
-    # head of fighter heading South
-    elif heading == 3:
-        for i in range(enemy):
-            fighter.append(placement + i * 10)
-            fighter = check_placement(fighter, space_filled)
-            print(placement + i * 10)
-    # head of fighter heading West
-    elif heading == 4:
-        for i in range(enemy):
-            fighter.append(placement - i)
-            fighter = check_placement(fighter, space_filled)
-            print(placement - i)
-    return fighter
 
 """
 Function to place enemy starfighters at random.
@@ -86,7 +91,7 @@ def place_enemies():
             # Places enemy Starfighter at random
 
             enemy_start = randrange(99)
-            enemy_heading = randrange(1, 4)
+            enemy_heading = randrange(1, 2)
 
             print(enemy, enemy_start, enemy_heading)
             fighter = check_enemy(enemy, enemy_start, enemy_heading, space_filled)
@@ -191,17 +196,7 @@ for i in range(60):
     )
     player_board(hit, miss, destroyed)
 
-# Opening message to the player
-print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
 
-# Player name entry
-Username = input("Please enter your name: \n")
-print("\n")
-print("Welcome, Admiral", Username, "\n")
-print("Admiral", Username,",your fleet is in position and awaiting your command.","\n" * 2,)
-
-# Gameboard key
-print("Key:", "\n", "H = Hit", "\n", "M = Miss", "\n", "D = Destroyed", "* = Starfighter","\n")
 
 # Function to record player move
 # if len(player_turn) != 2:
