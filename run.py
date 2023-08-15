@@ -1,13 +1,25 @@
 # Used for random number generation
 from random import randrange
 
+# Lists to hold a 6x6 gameboard for the player and computer
+
+player_board = [[' ' for _ in range(6)] for _ in range (6)]
+computer_board = [[' ' for _ in range(6)] for _ in range (6)]
+
+# Gameboard X & Y axis display
+
+x_axis = ['1', '2', '3', '4', '5', '6']
+y_axis = ['A', 'B', 'C', 'D', 'E', 'F']
+
+
+
+
 # Functions to check placement of enemy starfighters
 
 """
 Function to place enemy starfighters within the game board
 
 """
-
 
 def check_placement(fighter, space_filled):
     for i in range(len(fighter)):
@@ -25,9 +37,7 @@ def check_placement(fighter, space_filled):
 
     return fighter
 
-
 # Function to determine random placement and heading of enemy ships within grid size
-
 
 def check_enemy(enemy, placement, heading, space_filled):
     heading = 4
@@ -58,14 +68,12 @@ def check_enemy(enemy, placement, heading, space_filled):
             print(placement - i)
     return fighter
 
-
 """
 Function to place enemy starfighters at random.
 While not sharing the same grid space,
 or spilling out of the game board
 
 """
-
 
 def place_enemies():
     space_filled = []
@@ -88,7 +96,6 @@ def place_enemies():
         print(enemy_fleet)
 
     return enemy_fleet, space_filled
-
 
 # Opponent Gameboad
 # Creates opponent Gameboard
@@ -116,7 +123,6 @@ def opponent_board(space_filled):
             player_shot = player_shot + 1
         print(x, " ", grid_rows)
 
-
 def computer_move(shot_record):
     on_target = "no"
     while on_target == "no":
@@ -130,7 +136,6 @@ def computer_move(shot_record):
             print("Please re-enter new co-ordinates")
 
     return player_turn, shot_record
-
 
 def player_board(hit, miss, destroyed):
     print("\n", "    0  1  2  3  4  5  6  7  8  9 ", "\n")
@@ -155,7 +160,6 @@ def player_board(hit, miss, destroyed):
             player_shot = player_shot + 1
         print(x, " ", grid_rows)
 
-
 def check_move(player_turn, enemy_fleet, hit, miss, destroyed):
     computer_miss = 1
     for i in range(len(enemy_fleet)):
@@ -170,7 +174,6 @@ def check_move(player_turn, enemy_fleet, hit, miss, destroyed):
         miss.append(player_turn)
 
     return enemy_fleet, hit, miss, destroyed
-
 
 hit = []
 miss = []
@@ -188,7 +191,6 @@ for i in range(60):
     )
     player_board(hit, miss, destroyed)
 
-
 # Opening message to the player
 print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
 
@@ -199,7 +201,7 @@ print("Welcome, Admiral", Username, "\n")
 print("Admiral", Username,",your fleet is in position and awaiting your command.","\n" * 2,)
 
 # Gameboard key
-print("Key:", "\n", "H = Hit", "\n", "M = Miss", "\n", "D = Destroyed", "\n")
+print("Key:", "\n", "H = Hit", "\n", "M = Miss", "\n", "D = Destroyed", "* = Starfighter","\n")
 
 # Function to record player move
 # if len(player_turn) != 2:
@@ -232,7 +234,6 @@ def player_move(shot_record):
 
     return player_turn
 
-
 # Player Gameboard
 # Creates player Gameboard
 def player_board(hit, miss, destroyed):
@@ -260,11 +261,9 @@ def player_board(hit, miss, destroyed):
             player_shot = player_shot + 1
         print(x, " ", grid_rows)
 
-
 # enemy_ships,filled_space = place_enemies()
 
 # Function to check if shot on enemy ship has hit,miss,destroyed
-
 
 def check_move(player_turn, enemy_ship1, enemy_ship2, hit, miss, destroyed):
     if player_turn in enemy_ship1:
@@ -284,12 +283,10 @@ def check_move(player_turn, enemy_ship1, enemy_ship2, hit, miss, destroyed):
 
     return enemy_ship1, enemy_ship2, hit, miss, destroyed
 
-
 # Starship placement testing
 
 enemy_ship1 = [15, 16]
 enemy_ship2 = [1, 7]
-
 # enemy_ship3 = []
 # enemy_ship4 = []
 # enemy_ship5 = []
