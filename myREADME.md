@@ -79,3 +79,25 @@ Deployement
 
 
 Credits
+
+- Mentor Graeme
+After speaking with Graeme when discussing the progress on this project and inspecting my code, 
+
+- Sean from Tutor Support. I reached out to Tutor Support after I attempted to deploy this project on Heroku.
+Whilst following through the Deploying our Project, Part 1 video from the Love Sandwiches Walkthrough project,
+upon my first attempt at deployment, the deployment failed due to the below error:
+
+ERROR: Could not find a version that satisfies the requirement python-apt==2.4.0+ubuntu1 (from versions: 0.0.0, 0.7.8)
+ERROR: No matching distribution found for python-apt==2.4.0+ubuntu1
+! Push rejected, failed to compile Python app.
+! Push failed.
+
+Before finishing work on my project for the night I sent an out of hours message off to Tutor Support to ask for some assistance,
+as after searching resources such as Stack Overflow and the code institute community channels within Slack. I was yet to find a solution that fixed the issue, although other students appeared to have the same problem.
+
+When I resumed work on this project the following morining I had a reply from Sean, who suggested that after looking at the Starships repository, Sean believed that the issue was possibly caused from using the pip3 freeze > requirements.txt whilst constructing my project on Code Anywhere and that by using the pip3 freeze > requirements.txt had installed unnecessary packages into the program, which has caused the error. Sean suggested that a possible fix would be to, replace the packages with those found currently in the requirements.txt file and to try redeployment again.
+
+After following Seans instructions and attempting redeployment on Heroku, the deployment was successful.
+
+# insert heroku-error, heroku-fix abd pip3freeze images
+
