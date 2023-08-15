@@ -1,71 +1,84 @@
+# TO DO
+# if len(player_turn) != 2:
+# print("Please re-enter new co-ordinates")
+# if len(player_turn) == 2:
+#  check index length is alpha numerical
+# index [0] = A
+# player_turn = 'A1'
+# if txt[0] isalpha() and text[1] isnumberic()  
+# column_axis = [A, B, C, D, E]
+# grid_axis = [1, 2, 3, 4, 5]
+# print(x,y)
+
+
 # Used for random number generation
-from random import randrange
+import random
 
 # Opening message to the player
 print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
 
 # Player name entry
-Username = input("Please enter your name: \n")
+username = input("Please enter your name: \n")
 print("\n")
-print("Welcome, Admiral", Username, "\n")
-print("Admiral", Username,",your fleet is in position and awaiting your command.","\n" * 2,)
+print("Welcome, Admiral", username, "\n")
+print("Admiral", username,",your fleet is in position and awaiting your command.","\n" * 2,)
 
 # Gameboard key
-print("Key:", "\n", "H = Hit", "\n", "M = Miss", "\n", "D = Destroyed", "* = Starfighter","\n")
+print("Key:", "\n", "H = Hit", "\n", "M = Miss", "\n", "D = Destroyed", "\n", "* = Starfighter","\n")
 
-# Lists to hold a 6x6 gameboard for the player and computer
+# Lists to hold a 5x5 gameboard for the player and computer
 
-game_board1 = [[' ' for _ in range(6)] for _ in range (6)]
-game_board2 = [[' ' for _ in range(6)] for _ in range (6)]
+player_board = [[' ' for _ in range(5)] for _ in range (5)]
+computer_board = [[' ' for _ in range(5)] for _ in range (5)]
+player_guesses = [[' ' for _ in range(5)] for _ in range (5)]
+
+def print_board(board):
+    print("   1 2 3 4 5")
+    print("  -----------")
+    for i, row in list(board):
+        print(f"{i+1}| " + ' '.join(row))
 
 # Gameboard X & Y axis display
 
-x_axis = ['1', '2', '3', '4', '5', '6']
-y_axis = ['A', 'B', 'C', 'D', 'E', 'F']
+x_axis = ['1', '2', '3', '4', '5']
+y_axis = ['A', 'B', 'C', 'D', 'E']
 
 # Function to create the players gameboard
 
-def player_board()
+def player_board(username, board):
+    print(f"{username} Board:")
+    print("  " + "  ".join(x_axis))
+    print("  _" + "_" * 24)
 
-
-
-
-
-
+    for y in range(5):
+        row = []
+        for x in range(5)L
+        space = board[y][x]
 # Functions to check placement of enemy starfighters
 
 """
 Function to place enemy starfighters within the game board
 
 """
-
 def check_placement(fighter, space_filled):
-    for i in range(len(fighter)):
-        num = fighter[i]
-        if num in space_filled:
-            fighter = [-1]
-            break
-        elif num < 0 or num > 99:
-            fighter = [-1]
-            break
-        elif num % 10 == 9 and i < len(fighter) - 1:
-            if fighter[i + 1] % 10 == 0:
-                fighter = [-1]
-                break
-
+    for num in fighter:
+        if num in space_filled or num < 0 or num > 24:
+            return [-1]
+        elif num % 5 == 4 and fighter.index(num) < len(fighter) - 1 and fighter[fighter.index(num) + 1] % 5 == 0:
+            return [-1]
     return fighter
 
 # Function to determine random placement and heading of enemy ships within grid size
 
 def check_enemy(enemy, placement, heading, space_filled):
-    heading = 4
+
     fighter = []
     # head of fighter heading North
     if heading == 1:
         for i in range(enemy):
-            fighter.append(placement - i * 10)
+            fighter.append(placement - i * 5)
             fighter = check_placement(fighter, space_filled)
-            print(placement - i * 10)
+            print(placement - i * 5)
     # head of fighter heading East
     elif heading == 2:
         for i in range(enemy):
@@ -83,18 +96,18 @@ or spilling out of the game board
 def place_enemies():
     space_filled = []
     enemy_fleet = []
-    enemy_fighters = [5, 3, 3, 2, 1, 1]
+    enemy_fighters = [3, 2, 1, 1]
 
     for enemy in enemy_fighters:
         fighter = [-1]
         while fighter[0] == -1:
             # Places enemy Starfighter at random
 
-            enemy_start = randrange(99)
+            enemy_start = randrange(35)
             enemy_heading = randrange(1, 2)
 
-            print(enemy, enemy_start, enemy_heading)
-            fighter = check_enemy(enemy, enemy_start, enemy_heading, space_filled)
+        print(enemy, enemy_start, enemy_heading)
+        fighter = check_enemy(enemy, enemy_start, enemy_heading, space_filled)
 
         enemy_fleet.append(fighter)
         space_filled = space_filled + fighter
@@ -107,16 +120,16 @@ def place_enemies():
 def opponent_board(space_filled):
     """
 
-    # Creates a 10x10 grid displaying 0-9 along both x & y axis
+    # Creates a 10x10 grid displaying 1-5 along both x & y axis
 
     """
-    print("\n", "    0  1  2  3  4  5  6  7  8  9 ", "\n")
+    print("\n", "    1  2  3  4  5", "\n")
 
     # Player shot counter
     player_shot = 0
-    for x in range(10):
+    for x in range(5):
         grid_rows = ""
-        for y in range(10):
+        for y in range(5):
             grid_space = " _ "
             """
 # Enemy Boat markers for testing
@@ -132,7 +145,7 @@ def computer_move(shot_record):
     on_target = "no"
     while on_target == "no":
         try:
-            player_turn = randrange(99)
+            player_turn = randrange(24)
             if player_turn not in shot_record:
                 on_target = "yes"
                 shot_record.append(player_turn)
@@ -143,13 +156,13 @@ def computer_move(shot_record):
     return player_turn, shot_record
 
 def player_board(hit, miss, destroyed):
-    print("\n", "    0  1  2  3  4  5  6  7  8  9 ", "\n")
+    print("\n", "     1  2  3  4  5 ", "\n")
 
     # Player shot counter
     player_shot = 0
-    for x in range(10):
+    for x in range(5):
         grid_rows = ""
-        for y in range(10):
+        for y in range(5):
             grid_space = " _ "
             """
 # Hit, Miss, Destroyed markers
@@ -196,21 +209,6 @@ for i in range(60):
     )
     player_board(hit, miss, destroyed)
 
-
-
-# Function to record player move
-# if len(player_turn) != 2:
-# print("Please re-enter new co-ordinates")
-# if len(player_turn) == 2:
-#  check index length is alpha numerical
-# index [0] = A
-# player_turn = 'A1'
-# if txt[0] isalpha() and text[1] isnumberic()  
-# column_axis = [A, B, C, D, E]
-# grid_axis = [1, 2, 3, 4, 5]
-# print(x,y)
-
-
 def player_move(shot_record):
     on_target = "no"
     while on_target == "no":
@@ -232,15 +230,15 @@ def player_move(shot_record):
 # Player Gameboard
 # Creates player Gameboard
 def player_board(hit, miss, destroyed):
-    # Creates a 10x10 grid displaying 0-9 along both x & y axis
+    # Creates a 10x10 grid displaying 0-5 along both x & y axis
 
-    print("\n", "    0  1  2  3  4  5  6  7  8  9 ", "\n")
+    print("\n", "    0  1  2  3  4  5   ", "\n")
 
     # Player shot counter
     player_shot = 0
-    for x in range(10):
+    for x in range(5):
         grid_rows = ""
-        for y in range(10):
+        for y in range(5):
             grid_space = " _ "
             """
 # Hit, Miss, Destroyed markers
@@ -285,7 +283,7 @@ enemy_ship2 = [1, 7]
 # enemy_ship3 = []
 # enemy_ship4 = []
 # enemy_ship5 = []
-# enemy_ship6 = []
+
 
 # Hit and Miss testing area
 hit = []
