@@ -75,6 +75,8 @@ Validation
 
 - Deployement
 
+- Deployment to Heroku
+
 Ensure all relevant packages for project are installed, and make any final commits and push the update through to Github.
 
 Create or Sign in to your Heroku account.
@@ -105,7 +107,25 @@ Afterwards proceed to scroll down the page and choose if would prefer Automatic 
 Finally below at the end of the page we have reached the Manual Deploy section where we click on the Deploy Branch button so that we can initiate our apps deployment.
 
 
+- Forking and Cloning
 
+How to Fork the repository:
+
+Log into Github.
+
+Go to the repository for this project, (https://github.com/TobyJef/starfighers)
+
+Click the Fork button found on the right of the page underneath the upper navigation bar.
+
+- How to Clone the repository:
+
+Log into GitHub.
+
+Go to the repository for this project, (https://github.com/TobyJef/starfighters)
+
+Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
+
+Open a terminal in your code editor type 'git clone' into the terminal and then paste the link you copied from the Github repository. Press enter to change the current working directory to the location you want to use for the cloned directory. 
 
 
 

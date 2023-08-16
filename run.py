@@ -76,6 +76,10 @@ def create_fleet():
         pilot = get_fighters(starfighters, space_filled)
         player_fleet.append(starfighter)
 
+    return starfighter
+
+player_fleet = create_fleet
+
 def create_fighters():
     """
     Creates and places the enemy fleet at random
