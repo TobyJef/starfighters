@@ -2,60 +2,25 @@
 from random import randrange
 import random
 
+y_axis = ["A", "B", "C", "D", "E"]
+x_axis = ["1", "2", "3", "4", "5"]
+title = ("\n", "  ", "*" * 3, "Starfighters", "*" * 3, "\n")
 
-# Opening message to the player
-print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
+# Player shot counter
+player_shot = 0
+for x in range(5):
+    grid_rows = ""
+    for y in range(5):
+        grid_space = " _ "
 
-# Player name entry
-username = input("Please enter your name: \n")
-print("\n")
-print("Welcome, Admiral", username, "\n")
-print("Admiral", username,",your fleet is in position and awaiting your command.","\n" * 2,)
+if player_shot in space_filled:
+    grid_space = " O "
 
-# Gameboard key
-print("Key:", "\n", "H = Hit", "\n", "M = Miss", "\n", "* = Starfighter","\n")
+    grid_rows = grid_rows + grid_space
+    player_shot = player_shot + 1
+print(x, " ", grid_rows)
 
-def get_shot(shot_record):
-    """
-    Asks player to input their shot co-ordinates
-    and checks to the shot lands within the grid
-    """
-    on_target = "no"
-    while on_target == "no":
-        try:
-            player_turn = input("Admiral, Please enter your shot: ")
-            player_turn = input(player_turn)
-            if player_turn < 0 or player_turn > 24:
-                print ("Sorry Admiral, We cannot fire there")
-            elif player_turn in shot_record:
-                print("We have already used those co-ordinates. Try again")                
-            else:
-                ok = "yes"
-                break
-        except:
-            print("Incorrect shot co-ordinates. Please try again")
-
-def show_board(hit,miss,destroyed):
-    """
-    Creates a 5x5 game board for the player
-    """
-    player_shot = 0
-    for x in range(5):
-        grid_row = ""
-        for y in range(5):
-            grid_space = " _ "
-            if player_shot in miss:
-                grid_space = " M "
-            elif player_shot in hit:
-                grid_space = " H "
-            elif player_shot in destroyed:
-                grid_space = " D "
-
-            grid_row = grid_row + grid_space
-            player_shot = player_shot + 1
-        print(x," ",grid_row)
-
-def check_placement(fighter, space_filled):
+def place_enemies():
     """
     Function to place enemy starfighters within the game board
 
@@ -75,115 +40,92 @@ def check_placement(fighter, space_filled):
 
     return fighter
 
-def check_enemy(enemy, placement, heading, space_filled):
+# Opening message to the player
+print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
+
+# Player name entry
+username = input("Please enter your name: \n")
+print("\n")
+print("Welcome, Admiral", username, "\n")
+print("Admiral", username,",your fleet is in position and awaiting your command.","\n" * 2,)
+
+# Gameboard key
+print("Key:", "\n", "H = Hit", "\n", "o = Miss", "\n", "* = Starfighter","\n")
+
+# Player's game board
+def player_board(hit, miss):
+    print(title)
     """
-    Function to determine random placement and heading of enemy ships within grid size
+    Function to display the player's shots against the computer
     """
-    fighter = []
-    # head of fighter heading North
-    if heading == 1:
-        for i in range(enemy):
-            fighter.append(placement - i * 5)
-            fighter = check_placement(fighter, space_filled)
-            print(placement - i * 5)
-    # head of fighter heading East
-    elif heading == 2:
-        for i in range(enemy):
-            fighter.append(placement + i)
-            fighter = check_placement(fighter, space_filled)
-            print(placement + i)
+    for x in range(5):
+        grid_rows = ""
+        for y in range(5):
+            grid_space = " _ "
+            # Hit, Miss markers
+            if player_shot in miss:
+                grid_space = " M "
+            elif player_shot in hit:
+                grid_space = " H "
 
-def place_enemies():
+            grid_rows = grid_rows + grid_space
+            player_shot = player_shot + 1
+        print(x, " ", grid_rows)
+
+#
+def guess_board(hit,miss):
     """
-    Function to place enemy starfighters at random.
-    While not sharing the same grid space,
-    or spilling out of the game board
+    Creates a 5x5 game board for the player
     """
-    space_filled = []
-    enemy_fleet = []
-    enemy_fighters = [3, 2, 1, 1,]
+    player_shot = 0
+    for x in range(5):
+        grid_row = ""
+        for y in range(5):
+            grid_space = " _ "
+            if player_shot in miss:
+                grid_space = " M "
+            elif player_shot in hit:
+                grid_space = " o "
 
-    for enemy in enemy_fighters:
-        fighter = [-1]
-        while fighter[0] == -1:
-            # Places enemy Starfighter at random
+            grid_row = grid_row + grid_space
+            player_shot = player_shot + 1
+        print(x," ",grid_row)
 
-            enemy_start = randrange(24)
-            enemy_heading = randrange(1, 2)
-
-            print(enemy, enemy_start, enemy_heading)
-            fighter = check_enemy(enemy, enemy_start, enemy_heading, space_filled)
-
-        enemy_fleet.append(fighter)
-        space_filled = space_filled + fighter
-        print(enemy_fleet)
-
-    return enemy_fleet, space_filled
+#def check_placement(fighter, space_filled):
 
 # Opponent Gameboad
 # Creates opponent Gameboard
 def opponent_board(space_filled):
     """
-
-    # Creates a 5x5 grid displaying 0-9 along both x & y axis
-
+    # Creates a 5x5 grid to mark the players shots
     """
-    print("\n", "    1  2  3  4  5 ", "\n")
+    print(y-axis)
 
-    # Player shot counter
-    player_shot = 0
-    for x in range(5):
-        grid_rows = ""
-        for y in range(5):
-            grid_space = " _ "
-            """
-# Enemy Boat markers for testing
-"""
-            if player_shot in space_filled:
-                grid_space = " O "
+#
 
-            grid_rows = grid_rows + grid_space
-            player_shot = player_shot + 1
-        print(x, " ", grid_rows)
+def check_move(missed, player_turn, enemy_fleet, hit, miss):
+    """
+    Function to check if a starfighter has been hit or missed
+    """
+    missed = 1
+    for i in range(len(enemy_fleet)):
+        if player_turn in enemy_fleet[i]:
+            enemy_fleet[i].remove(player_turn)
+            missed = 0
+            if len(enemy_fleet[i]) > 0:
+                hit.append(player_turn)
+            else:
+                destroyed.append(player_turn)
+    if missed == 1:
+        miss.append(player_turn)
 
-def computer_move(shot_record):
-    on_target = "no"
-    while on_target == "no":
-        try:
-            player_turn = randrange(24)
-            if player_turn not in shot_record:
-                on_target = "yes"
-                shot_record.append(player_turn)
-                break
-        except:
-            print("Please re-enter new co-ordinates")
+    return missed, enemy_fleet, hit, miss
 
-    return player_turn, shot_record
 
-def player_board(hit, miss, destroyed):
-    print("\n", "    1  2  3  4  5  ", "\n")
-
-    # Player shot counter
-    player_shot = 0
-    for x in range(5):
-        grid_rows = ""
-        for y in range(5):
-            grid_space = " _ "
-            """
-# Hit, Miss, Destroyed markers
-"""
-            if player_shot in miss:
-                grid_space = " M "
-            elif player_shot in hit:
-                grid_space = " H "
-            elif player_shot in destroyed:
-                grid_space = " D "
-
-            grid_rows = grid_rows + grid_space
-            player_shot = player_shot + 1
-        print(x, " ", grid_rows)
-
-def check_move(player_turn, enemy_fleet, hit, miss, destroyed):
+def check_move(player_turn, enemy_fleet, hit, miss):
+    """
+    Function to check
+    """
     computer_miss = 1
     for i in range(len(enemy_fleet)):
         if player_turn in enemy_fleet[i]:
@@ -196,23 +138,52 @@ def check_move(player_turn, enemy_fleet, hit, miss, destroyed):
     if computer_miss == 1:
         miss.append(player_turn)
 
-    return enemy_fleet, hit, miss, destroyed
+    return enemy_fleet, hit, miss
 
-hit = []
-miss = []
-destroyed = []
-shot_record = []
+def player_move(shot_record):
+    """
+    Asks player to input their shot co-ordinates
+    and checks to the shot lands within the grid
+    """
+    on_target = "no"
+    while on_target == "no":
+        try:
+            player_turn = input("Admiral, Please enter your shot: ")
+            player_turn = input(player_turn)
+            if player_turn < 0 or player_turn > 24:
+                print ("Sorry Admiral, We cannot fire there")
+            elif player_turn in shot_record:
+                print("We have already used those co-ordinates. Try again")                
+            else:
+                ok = "yes"
+                break
+        except:
+            print("Incorrect shot co-ordinates. Please try again")
 
-enemy_fleet,space_filled = place_enemies()
-opponent_board(space_filled)
+def computer_move(shot_record):
+    """
+    Checks if computers shot is "on_target"
+    """
+    on_target = "no"
+    while on_target == "no":
+        try:
+            player_turn = randrange(24)
+            if player_turn not in shot_record:
+                on_target = "yes"
+                shot_record.append(player_turn)
+                break
+        except:
+            print("Please re-enter new co-ordinates")
 
-# Test ran at continuos shots
+    return player_turn,shot_record
+ 
+# Test ran with consecutive shots
 for i in range(60):
     player_turn, shot_record = computer_move(shot_record)
-    enemy_fleet, hit, miss, destroyed = check_move(
-        player_turn, enemy_fleet, hit, miss, destroyed
+    enemy_fleet, hit, miss = check_move(
+        player_turn, enemy_fleet, hit, miss
     )
-    player_board(hit, miss, destroyed)
+    player_board(hit, miss)
 
 def player_move(shot_record):
     on_target = "no"
@@ -232,12 +203,12 @@ def player_move(shot_record):
 
     return player_turn
 
-# Player Gameboard
-# Creates player Gameboard
-def player_board(hit, miss, destroyed):
-    # Creates a 5x5 grid displaying 0-9 along both x & y axis
+#  Gameboard
+#  Gameboard
+def game_board(hit, miss):
+    # Creates a 5x5 grid displaying 0-5 along both x & y axis
 
-    print("\n", "    1  2  3  4  5 ", "\n")
+    print("\n", y_axis, "\n")
 
     # Player shot counter
     player_shot = 0
@@ -259,11 +230,9 @@ def player_board(hit, miss, destroyed):
             player_shot = player_shot + 1
         print(x, " ", grid_rows)
 
-# enemy_ships,filled_space = place_enemies()
-
-def check_move(player_turn, enemy_fleet, hit, miss, destroyed):
+def check_move(player_turn, enemy_fleet, hit, miss):
     """
-    Function to check if shot on enemy ship has hit,miss,destroyed
+    Function to check if the shot on enemy Starfighter has hit or miss
     """
     if player_turn in enemy_ship1:
         enemy_ship1.remove(player_turn)
@@ -280,9 +249,15 @@ def check_move(player_turn, enemy_fleet, hit, miss, destroyed):
     else:
         miss.append(player_turn)
 
-    return enemy_fleet, hit, miss, destroyed
+    return enemy_fleet, hit, miss
 
-# Starship placement testing
+
+# Empty Array group
+hit = []
+miss = []
+shot_record = []
+
+#Enemy fleet of ships
 enemy_fleet = [enemy1,enemy2,enemy3,enemy4,enemy5,]
 enemy1 = []
 enemy2 = []
@@ -290,6 +265,7 @@ enemy3 = []
 enemy4 = []
 enemy5 = []
 
+#Player's fleet of ships
 player_fleet = [fighter1,fighter2,fighter3,fighter4,fighter5]
 fighter1 = []
 fighter2 = []
@@ -297,31 +273,53 @@ fighter3 = []
 fighter4 = []
 fighter5 = []
 
-# Hit and Miss testing area
-hit = []
-miss = []
-destroyed = []
+# Function calling
+#
+enemy_fleet,space_filled = place_enemies()
+
+#
+player_board(space_filled, hit, miss)
+
+#
+guess_board(space_filled)
+
+#
+player_turn, shot_record = computer_move(shot_record)
+
 
 # Function calling area
 
 # Player move limit. Test at 99.
 for i in range(99):
+
+
     # Function to check for duplicate player shots
-    shot_record = hit + miss + destroyed
+    shot_record = hit + miss
 
     # Function to record players shot
     player_turn = player_move(shot_record)
+    player_turn, shot_record = computer_move(shot_record)
 
     # Function to check players move
-    enemy_ship1, enemy_ship2, hit, miss, destroyed = check_move(
-        player_turn, enemy_ship1, enemy_ship2, hit, miss, destroyed
+    enemy_fleet, hit, miss = check_move(
+        player_turn, enemy_fleet, hit, miss
     )
 
-    # Function calling Player Gameboard
-    player_board(hit, miss, destroyed)
+# Function calling Computer Gameboard
+opponent_board(space_filled)
+
+# Function calling Player Gameboard
+player_board(hit, miss, missed)
+
+
+
 
     if len(enemy_fleet) < 1:
-        print("Congratulations Admiral, Enemy fleet has destroyed")
+        print("Congratulations Admiral", username, "The enemy fleet has been destroyed")
+        break
+
+    if len(player_fleet) <1:
+        print("The enemy has destroyed your fleet")
         break
 
 print("End of test")
