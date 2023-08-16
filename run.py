@@ -1,6 +1,63 @@
 # Used for random number generation
 from random import randrange
-import random
+
+def check_placement(fighter,space_filled):
+    """
+    Check to ensure Starfighters do not occupy the same grid space
+    """
+    for i in range(len(fighter)):
+        num = fighter[i]
+        if num in space_filled:
+                fighter = -1
+                break
+        elif num < 0 or num > 24:
+            fighter = -1
+            break
+        elif num % 5 == 4 and i < len(fighter) - 1:
+            if fighter[i + 1] % 5 == 0:
+                fighter = [-1]
+                break
+        return(fighter)
+
+
+def check_starfighter(fighter,enemy_start,enemy_heading,space_filled):
+    """
+    Places enemy Starfighters at random
+    """
+    fighter = []
+    if enemy_heading == 1:
+        # Fighter displayed vertically
+        for i in range(enemy):
+            fighter.append(start + i+5)
+            fighter = check_placement(fighter,space_filled)
+
+    elif enemy_heading == 2:
+        # Fighter displayed horizontally
+            for i in range(enemy):
+                fighter.append(start +i)
+                fighter = check_placement(fighter,space_filled)
+        
+    return fighter
+
+def create_fighters():
+    space_filled = []
+    enemy_fleet = [enemy1, enemy2, enemy3, enemy4, enemy5]
+    enemy_fighters = [3,2,2,1,1]
+    for enemy in enemy_fighters:
+        fighter = [-1]
+        while fighter[0] == -1:
+            enemy_start = randrange(24)
+            enemy_heading = randrange(1,2)
+            print(enemy_fighters,enemy_start,enemy_heading)
+            fighter = check_starfighter(enemy,enemy_start,enemy_heading)
+
+        enemy_fleet.append(fighter)
+        space_filled = space_filled + fighter
+    
+    return enemy_fleet,space_filled
+
+fighters, enemy_fleet,space_filled = create_fighters()
+computer_board(space_filled)
 
 y_axis = ["A", "B", "C", "D", "E"]
 x_axis = ["1", "2", "3", "4", "5"]
@@ -19,26 +76,6 @@ if player_shot in space_filled:
     grid_rows = grid_rows + grid_space
     player_shot = player_shot + 1
 print(x, " ", grid_rows)
-
-def place_enemies():
-    """
-    Function to place enemy starfighters within the game board
-
-    """
-    for i in range(len(fighter)):
-        num = fighter[i]
-        if num in space_filled:
-            fighter = [-1]
-            break
-        elif num < 0 or num > 24:
-            fighter = [-1]
-            break
-        elif num % 5 == 4 and i < len(fighter) - 1:
-            if fighter[i + 1] % 5 == 0:
-                fighter = [-1]
-                break
-
-    return fighter
 
 # Opening message to the player
 print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
@@ -91,17 +128,26 @@ def guess_board(hit,miss):
             player_shot = player_shot + 1
         print(x," ",grid_row)
 
-#def check_placement(fighter, space_filled):
-
 # Opponent Gameboad
 # Creates opponent Gameboard
-def opponent_board(space_filled):
+def computer_board(space_filled):
     """
-    # Creates a 5x5 grid to mark the players shots
+    # Creates a 5x5 grid to place the computers Starfighters
     """
     print(y-axis)
 
-#
+    for x in range(5):
+        grid_rows = ""
+    for y in range(5):
+        grid_space = " _ "
+        # Hit, Miss markers
+        if player_shot in space_filled:
+            grid_space = " o "
+
+            grid_row = grid_row + grid_space
+            player_shot = player_shot + 1
+
+        return(x," ",grid_row)
 
 def check_move(missed, player_turn, enemy_fleet, hit, miss):
     """
@@ -292,7 +338,6 @@ player_turn, shot_record = computer_move(shot_record)
 # Player move limit. Test at 99.
 for i in range(99):
 
-
     # Function to check for duplicate player shots
     shot_record = hit + miss
 
@@ -313,13 +358,14 @@ player_board(hit, miss, missed)
 
 
 
+# Checks to see if all Starships have been destroyed
 
-    if len(enemy_fleet) < 1:
-        print("Congratulations Admiral", username, "The enemy fleet has been destroyed")
-        break
+if len(enemy_fleet) < 1:
+    print("Congratulations Admiral", username, "The enemy fleet has been destroyed")
+    break
+elif len(player_fleet) <1:
+    print("The enemy has destroyed your fleet")
+    break
 
-    if len(player_fleet) <1:
-        print("The enemy has destroyed your fleet")
-        break
 
-print("End of test")
+print("End of Game, Thank You for playing")
