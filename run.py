@@ -1,16 +1,3 @@
-# TO DO
-# if len(player_turn) != 2:
-# print("Please re-enter new co-ordinates")
-# if len(player_turn) == 2:
-#  check index length is alpha numerical
-# index [0] = A
-# player_turn = 'A1'
-# if txt[0] isalpha() and text[1] isnumberic()  
-# column_axis = [A, B, C, D, E]
-# grid_axis = [1, 2, 3, 4, 5]
-# print(x,y)
-
-
 # Used for random number generation
 import random
 
@@ -26,104 +13,75 @@ print("Admiral", username,",your fleet is in position and awaiting your command.
 # Gameboard key
 print("Key:", "\n", "H = Hit", "\n", "M = Miss", "\n", "D = Destroyed", "\n", "* = Starfighter","\n")
 
-# Lists to hold a 5x5 gameboard for the player and computer
+"""
+Lists to hold a 5x5 gameboard for the player's gameboard,
+the players guesses and the computer's gameboard.
+Adds an underscore to show empty grid spaces.
+"""
+grid_space = "_"
+player_board = [[grid_space for _ in range(5)] for _ in range (5)]
+computer_board = [[grid_space for _ in range(5)] for _ in range (5)]
+player_guesses = [[grid_space for _ in range(5)] for _ in range (5)]
 
-player_board = [[' ' for _ in range(5)] for _ in range (5)]
-computer_board = [[' ' for _ in range(5)] for _ in range (5)]
-player_guesses = [[' ' for _ in range(5)] for _ in range (5)]
-
+# Create gameboards
 def print_board(board):
+    """
+    Creates a 5x5 gameboard, 
+    Prints the grid columns as 1-5
+    Also prints 11 -'s underneath to,
+    create a top border to the gameboards.
+    """
     print("   1 2 3 4 5")
     print("  -----------")
     for i, row in list(board):
         print(f"{i+1}| " + ' '.join(row))
 
-# Gameboard X & Y axis display
-
-x_axis = ['1', '2', '3', '4', '5']
-y_axis = ['A', 'B', 'C', 'D', 'E']
-
-# Function to create the players gameboard
-
-def player_board(username, board):
-    print(f"{username} Board:")
-    print("  " + "  ".join(x_axis))
-    print("  _" + "_" * 24)
-
-    for y in range(5):
-        row = []
-        for x in range(5)L
-        space = board[y][x]
-# Functions to check placement of enemy starfighters
-
-"""
-Function to place enemy starfighters within the game board
-
-"""
-def check_placement(fighter, space_filled):
-    for num in fighter:
-        if num in space_filled or num < 0 or num > 24:
-            return [-1]
-        elif num % 5 == 4 and fighter.index(num) < len(fighter) - 1 and fighter[fighter.index(num) + 1] % 5 == 0:
-            return [-1]
-    return fighter
-
-# Function to determine random placement and heading of enemy ships within grid size
-
-def check_enemy(enemy, placement, heading, space_filled):
-
-    fighter = []
-    # head of fighter heading North
-    if heading == 1:
-        for i in range(enemy):
-            fighter.append(placement - i * 5)
-            fighter = check_placement(fighter, space_filled)
-            print(placement - i * 5)
-    # head of fighter heading East
-    elif heading == 2:
-        for i in range(enemy):
-            fighter.append(placement + i)
-            fighter = check_placement(fighter, space_filled)
-            print(placement + i)
-
-"""
-Function to place enemy starfighters at random.
-While not sharing the same grid space,
-or spilling out of the game board
-
-"""
-
-def place_enemies():
-    space_filled = []
-    enemy_fleet = []
-    enemy_fighters = [3, 2, 1, 1]
-
-    for enemy in enemy_fighters:
-        fighter = [-1]
-        while fighter[0] == -1:
-            # Places enemy Starfighter at random
-
-            enemy_start = randrange(35)
-            enemy_heading = randrange(1, 2)
-
-        print(enemy, enemy_start, enemy_heading)
-        fighter = check_enemy(enemy, enemy_start, enemy_heading, space_filled)
-
-        enemy_fleet.append(fighter)
-        space_filled = space_filled + fighter
-        print(enemy_fleet)
-
-    return enemy_fleet, space_filled
-
-# Opponent Gameboad
-# Creates opponent Gameboard
-def opponent_board(space_filled):
+# Checks players co-ordinates
+def player_guess(player_input):
     """
-
-    # Creates a 10x10 grid displaying 1-5 along both x & y axis
-
+    Checks the length of the players input to,
+    make sure that a players guess does not exceed
+    two co-ordinates
     """
-    print("\n", "    1  2  3  4  5", "\n")
+    if len(player_input) != 2:
+        return None
+    row = ord(player_input[0]) - ord('A')
+    col = int(player_input[1]) - 1
+    if 0 <= row < board_size and 0 <= col < board_size:
+        return row, col
+    return None
+
+
+# Place player's Starfighters at random
+for _ in range(6):
+    """
+    Assigns the players 6 Starfighters at random
+    grid co-ordinates and displays the Starfighter
+    with an "*"
+    """
+    while True:
+        row = random.randint(0, board_size - 1)
+        col = random.randint(0, board_size - 1)
+        if player_board[row][col] == ' ':
+            player_board[row][col] = '*'
+            break
+
+
+# Place computer's ships
+for _ in range(6):
+    """
+    Assigns the computer 6 Starfighters at random
+    grid co-ordinates and displays the Starfighter
+    with an "*"
+    """
+    while True:
+        row = random.randint(0, board_size - 1)
+        col = random.randint(0, board_size - 1)
+        if computer_board[row][col] == ' ':
+            computer_board[row][col] = '*'
+            break
+
+
 
     # Player shot counter
     player_shot = 0
