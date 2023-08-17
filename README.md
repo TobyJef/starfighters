@@ -1,17 +1,17 @@
-Welcome to Starfighters
+* Welcome to Starfighters
 
-Starfighters is a single player, turn based strategy game set in the depths of space. Take command as Admiral, your mission is to hunt down and destroy the opposing enemy fleet before the enemy can locate and destroy your own Starships.
+Starfighters is a single player, turn based strategy game set in the depths of space. Take command as Admiral, your mission is to hunt down and destroy the opposing enemy fleet before the enemy can locate and destroy your own Starfighters.
 
-The enemy Admiral has hidden their fleet within this star systems nebula cloud, and their precise location cannot be detected. but your scanners can detect instances of any shots fired that have hit or destroyed an enemey vessel or failed to hit their mark and sailed harmlessly into the endless void of space.
+The enemy Admiral has hidden their fleet within this star systems nebula cloud, and their precise location cannot be detected. but your scanners however can detect and return instances of any shots fired that have hit or missed their target.
 
 Over the two game boards, use the tactical grids to record your shots on the enemy fleet, and the enemies attempt at your own Starfighters. All it takes is one direct hit to destroy a Starship, so speed an accuracy is of the most importance.
 
 Best of luck Admiral.
 
 
-- How to Play
+** How to Play
 
-A brief History 
+- A brief History 
 
 Starships is a single player game based on the classic pen and paper game of Battleships. In the original Battleships game the player is given two 10x10 grids. The first grid is used for the placement of the players five Battleships of varying sizes, and to mark the opponents shots against the player's ships. The second grid is used to mark down the players shot against the enemy ships and to record the outcome of a players turn. Turns for both the player and their opponent will result in a shot either hitting or missing a ship or resulting in a Battleship being sunk. The size of the ship determines the required amount of hits before a Battleship is sunk.
 
@@ -29,10 +29,9 @@ Due to different publications found of the game Battleships found around the wor
 
 In my version Starfighters, the classic Naval game has been given a sci-fi twist, with a brief backstory and mission briefing to transport the player and game into the cosmos. 
 
-A 10x10 grid size is being used for the players and the opponents ship placements. With the same basic rules of the game apply, find and destroy the entire enemy fleet, before they to destroy yours. Both sets of Starfighters are placed on the grids at random. 
+A 5x5 grid size is being used for the players and the opponents ship placements. With the same basic rules of the game apply, find and destroy the entire enemy fleet, before they to destroy yours. Both sets of Starfighters are placed on the grids at random. 
 
-- Features
-
+** Features
 
 - Game Design
 
@@ -41,41 +40,61 @@ The classic grid design from the game Battleships was used. This allows for prec
 A 5x5 grid size allows for a decent sized game board to accomodate single grid space sized Starfighters.
 It would be my intention in a future update to add a 10x10 grid. As discussed further in the Future Improvement section.  
 
+- Flow Diagram showing the intended flow of how the game would run from Start, to Finish.
+
+![Flow diagram Beginning](documentation/flow-diagram-start.webp)
+![Flow diagram Middle](documentation/flow-diagram-middle.webp)
+![Flow diagram End](documentation/flow-diagram-end.webp)
+
 - Future Improvements:
 
-The ability for the player to choose between the game standard 10x10 or a smaller 6x6 grid size.
+The ability for the player to choose between the game's set standard 5x5 or larger grid sizes, such as 6x6, 8x8 and 10x10.
 
 The ability for the player to set their own starfighter positions on their tactical grid.
 
-Bigger Starships and Starfighters to be added, with an additional option of allowing the player choice of which Starships/Fighters to be used in their game. 
+Larger Starfighters of taking up bigger grid spaces, and requiring more hits to be added, with an additional option of allowing the player choice of which Starfighters to be used in their game. 
 
-Bigger Starships and Starfighters would only be available to the player when playing on the 10x10 grid.
+Max amount of the larger Starfighters would only be available to the player when playing on the 10x10 grid.
 
 Difficulty option for the player to set the number of enemy ships to allow for increased or decreased game difficulty.
 
-- Technologies Used
+The use of an outside library such as colorama to introduce some colour and futher design into the game.
+
+Introduce a replay game function to allow the player to reset the game, and play a new game of Starfighters.
+
+** Technologies Used
 
 Starfighters was written using the Python programming language.
 
-Testing
+** Testing
 
-Bugs
+- Bugs
 
-- Solved Bugs
+Solved Bugs
+
+Issue found when trying to deploy my app on Heroku. I needed to reach out to Tutor Support for advice, the bug could have be an issue from using the pip3freeze command while composing my app on codeanywhere. Sean from Tutor Support, suggested to remove the installed packages and to re try deployment with a new set of packages. Once replacing what was suggested as the issue and attempted re-ployment on Heroku, the apps deployment was finally complete. Further information on this bug can be found in the credit section at the end of the ReadME.
+
 ![heroku error](documentation/heroku-error.webp)
-![heroku fix](documentation/heroku-fix.webp)
-![Out of Bounds Starship]
-![pip3freeze]
-![Ship destroyed bug]
-![Split Starfighter bug]
 
+The image of the below bug found during testing, would occur when testing the Hit, Miss, Destroyed markers against the board whilst in early development. Once the final shot on a ship was completed resulting in the ship being destroyed. All remaining empty spaces would change to the Destroyed marker.
 
+The issue found due to a mispelling and once corrected, the code would run as designed. The Destroyed element was eventually removed in this current iteration of Starfighters, due to design choice of the game overall. Preferring to use a smaller grid board and smaller sized ships, for game optimization when being played. It would be my intention in a future update to bring back the destroyed marker into the game.
 
+![Ship destroyed bug](documentation/ship-destroyed-bug.webp)
 
+An example of a planned larger sized starfighter's random placement by the program, being placed over two grid rows resulting in a split Starfighter.
+
+![Split Starfighter bug](documentation/split-ship.webp)
+
+An example of a planned larger sized starfighter's random placement by the program, being placed outside of the confines of the planned grid size.
+
+![Out of Bounds Starship](documentation/out-of-bounds.webp)
+
+The above examples of the larger sized Starfighters was eventually dropped in the current version of this game. But with a future plan to reintroduce them.
 
 - Remaining Bugs
 
-
+A remaining bug found within the game at the moment has come about by myself attempting to structure the code layout for easier reading. However in doing this it has resulted in the base game being able to run. Due to time, I was unable to perform a full de-bug and re-write of the code.
 
 Validation
 
@@ -157,5 +176,6 @@ When I resumed work on this project the following morining I had a reply from Se
 
 After following Seans instructions and attempting redeployment on Heroku, the deployment was successful.
 
-# insert heroku-error, heroku-fix abd pip3freeze images
-
+![pip3freeze](documentation/pip3freeze.webp)
+![heroku error](documentation/heroku-error.webp)
+![heroku fix](documentation/heroku-fix.webp)

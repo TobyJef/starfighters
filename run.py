@@ -71,7 +71,7 @@ def create_fleet(space_filled):
     Creates and places the players fleet at random
     """
     player_fleet = [pilot1, pilot2, pilot3, pilot4, pilot5]
-    starfighters = [3, 2, 2, 1, 1]
+    starfighters = [1, 1, 1, 1, 1]
 
     for friendly in starfighters:
         pilot = get_fighters(starfighters, space_filled)
@@ -87,7 +87,7 @@ def create_fighters(space_filled):
     Creates and places the enemy fleet at random
     """
     enemy_fleet = [enemy1, enemy2, enemy3, enemy4, enemy5]
-    enemy_fighters = [3, 2, 2, 1, 1]
+    enemy_fighters = [1, 1, 1, 1, 1]
     for enemy in enemy_fighters:
         fighter = [-1]
         while fighter[0] == -1:
@@ -100,11 +100,6 @@ def create_fighters(space_filled):
 
     return enemy_fleet, space_filled
 
-    # enemy_fleet,space_filled = create_fighters (enemy_fleet):
-
-
-y_axis = ["A", "B", "C", "D", "E"]
-x_axis = ["1", "2", "3", "4", "5"]
 title = ("\n", "  ", "*" * 3, "Starfighters", "*" * 3, "\n")
 
 # Player shot counter
@@ -323,7 +318,7 @@ pilot3 = []
 pilot4 = []
 pilot5 = []
 
-# Function calling
+# Function calling area
 
 # Creates enemy fleet
 enemy_fleet, space_filled = create_fighters(taken1)
