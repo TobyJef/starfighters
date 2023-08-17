@@ -62,6 +62,16 @@ Testing
 Bugs
 
 - Solved Bugs
+![heroku error](documentation/heroku-error.webp)
+![heroku fix](documentation/heroku-fix.webp)
+![Out of Bounds Starship]
+![pip3freeze]
+![Ship destroyed bug]
+![Split Starfighter bug]
+
+
+
+
 
 - Remaining Bugs
 
@@ -70,8 +80,7 @@ Bugs
 Validation
 
 - PEP8
-
-
+![PEP8 Validation](documentation/linter-pass.webp)
 
 - Deployement
 
@@ -90,11 +99,11 @@ Underneath App Information, you will find Config Vars.
 Click on the reveal Config Vars button, within the KEY box, add PORT and then add 8000 to the VALUE box. Then click add.
 This is done to due to a warning found on the Deploying our Project Part 2, video page. As it was found by not adding this there was a possibility that the deployment may fail.
 
-# Add the config-vars image.
+![ Add the config-vars image](documentation/config-vars.webp)
 
 Afterwards we need to turn our attention to installing some buildpacks we need to run our app outside of the requirements.txt file. First we want to install the python buildpack, followed by the node.js buildpack, then click the add buildpack button.
 
-# Add the buildpacks image
+![Add the buildpacks image](documentation/buildpacks.webp)
 
 Once the buildpacks have been added, scroll back to the top of the page and head over to the deployment page, by clicking on the Deploy tab.
 
@@ -128,13 +137,7 @@ Click on the code button, select whether you would like to clone with HTTPS, SSH
 Open a terminal in your code editor type 'git clone' into the terminal and then paste the link you copied from the Github repository. Press enter to change the current working directory to the location you want to use for the cloned directory. 
 
 
-
-
 - Credits
-
-- Mentor Graeme Taylor
-
-After speaking with Graeme when discussing the progress on this project and inspecting my code, 
 
 - Sean from Tutor Support.
 
