@@ -2,15 +2,15 @@
 from random import randrange
 
 
-def check_placement(fighter,space_filled):
+def check_placement(fighter, space_filled):
     """
     Check to ensure enemy Starfighters do not occupy the same grid space
     """
     for i in range(len(fighter)):
         num = fighter[i]
         if num in space_filled:
-                fighter = -1
-                break
+            fighter = -1
+            break
         elif num < 0 or num > 24:
             fighter = -1
             break
@@ -18,10 +18,10 @@ def check_placement(fighter,space_filled):
             if fighter[i + 1] % 5 == 0:
                 fighter = [-1]
                 break
-        return(fighter)
+        return (fighter)
 
 
-def check_starfighter(fighter,enemy_start,enemy_heading,space_filled):
+def check_starfighter(fighter, enemy_start, enemy_heading, space_filled):
     """
     Sets Starfighter direction
     """
@@ -30,26 +30,26 @@ def check_starfighter(fighter,enemy_start,enemy_heading,space_filled):
         # Fighter displayed vertically
         for i in range(enemy):
             fighter.append(start + i+5)
-            fighter = check_placement(fighter,space_filled)
+            fighter = check_placement(fighter, space_filled)
 
     elif enemy_heading == 2:
         # Fighter displayed horizontally
-            for i in range(enemy):
-                fighter.append(start +i)
-                fighter = check_placement(fighter,space_filled)
-        
-    return fighter
+        for i in range(enemy):
+            fighter.append(start + i)
+            fighter = check_placement(fighter, space_filled)
+
+    return fighter, space_filled
 
 
-def check_placement_player(fighter,space_filled):
+def check_placement_player(fighter, space_filled):
     """
     Check to ensure player Starfighters do not occupy the same grid space
     """
     for i in range(len(fighter)):
         num = fighter[i]
         if num in space_filled:
-                fighter = -1
-                break
+            fighter = -1
+            break
         elif num < 0 or num > 24:
             fighter = -1
             break
@@ -57,20 +57,21 @@ def check_placement_player(fighter,space_filled):
             if fighter[i + 1] % 5 == 0:
                 fighter = [-1]
                 break
-        return(fighter)
+        return (fighter)
+
 
 def get_fighters(starfighters, space_filled):
 
-
     return starfighter
 
-def create_fleet():
+
+def create_f  leet(space_filled):
+
     """
     Creates and places the players fleet at random
     """
-    space_filled = []
-    player_fleet = [pilot1,pilot2,pilot3,pilot4,pilot5]
-    starfighters = [3,2,2,1,1]
+    player_fleet = [pilot1, pilot2, pilot3, pilot4, pilot5]
+    starfighters = [3, 2, 2, 1, 1]
 
     for friendly in starfighters:
         pilot = get_fighters(starfighters, space_filled)
@@ -78,26 +79,29 @@ def create_fleet():
 
     return starfighter
 
-player_fleet = create_fleet
+  player_fleet = create_fleet
 
-def create_fighters():
+
+def create_fighters(space_filled):
     """
     Creates and places the enemy fleet at random
     """
-    space_filled = []
     enemy_fleet = [enemy1, enemy2, enemy3, enemy4, enemy5]
-    enemy_fighters = [3,2,2,1,1]
+    enemy_fighters = [3, 2, 2, 1, 1]
     for enemy in enemy_fighters:
         fighter = [-1]
         while fighter[0] == -1:
             enemy_start = randrange(24)
-            enemy_heading = randrange(1,2)
-            fighter = check_starfighter(enemy,enemy_start,enemy_heading)
+            enemy_heading = randrange(1, 2)
+            fighter = check_starfighter(enemy, enemy_start, enemy_heading)
 
         enemy_fleet.append(fighter)
         space_filled = space_filled + fighter
-    
-    return enemy_fleet,space_filled
+
+    return enemy_fleet, space_filled
+
+    # enemy_fleet,space_filled = create_fighters (enemy_fleet):
+
 
 y_axis = ["A", "B", "C", "D", "E"]
 x_axis = ["1", "2", "3", "4", "5"]
@@ -110,12 +114,12 @@ for x in range(5):
     for y in range(5):
         grid_space = " _ "
 
-if player_shot in space_filled:
-    grid_space = " O "
+    if player_shot in space_filled:
+        grid_space = " O "
 
     grid_rows = grid_rows + grid_space
     player_shot = player_shot + 1
-print(x, " ", grid_rows)
+print(x, " ", grid_rows, space_filled)
 
 # Opening message to the player
 print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
@@ -124,10 +128,10 @@ print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
 username = input("Please enter your name: \n")
 print("\n")
 print("Welcome, Admiral", username, "\n")
-print("Admiral", username,",your fleet is in position and awaiting your command.","\n" * 2,)
+print("Admiral", username, ",your fleet is in position and awaiting your command.", "\n" * 2,)
 
 # Gameboard key
-print("Key:", "\n", "H = Hit", "\n", "o = Miss", "\n", "* = Starfighter","\n")
+print("Key:", "\n", "H = Hit", "\n", "o = Miss", "\n", "* = Starfighter", "\n")
 
 
 # Player's Gameboard and Shot Checks
@@ -151,7 +155,7 @@ def player_board(hit, miss):
         print(x, " ", grid_rows)
 
 
-def check_move(player_turn,enemy_fleet,hit,miss):
+def check_move(player_turn, enemy_fleet, hit, miss):
     """
     Function to check
     """
@@ -167,7 +171,7 @@ def check_move(player_turn,enemy_fleet,hit,miss):
     if computer_miss == 1:
         miss.append(player_turn)
 
-    return enemy_fleet,hit,miss
+    return enemy_fleet, hit, miss
 
 
 def player_move(shot_record):
@@ -181,13 +185,12 @@ def player_move(shot_record):
             player_turn = input("Admiral, Please enter your shot: ")
             player_turn = input(player_turn)
             if player_turn < 0 or player_turn > 24:
-                print ("Sorry Admiral, We cannot fire there")
+                print("Sorry Admiral, We cannot fire there")
             elif player_turn in shot_record:
-                print("We have already used those co-ordinates. Try again")                
+                print("We have already used those co-ordinates. Try again")            
             else:
                 ok = "yes"
                 break
-        except:
             print("Incorrect shot co-ordinates. Please try again")
 
 
@@ -210,7 +213,7 @@ def computer_board(space_filled):
             grid_row = grid_row + grid_space
             player_shot = player_shot + 1
 
-        return(x," ",grid_row)
+        return (x, " ", grid_row)
 
 
 def computer_move(shot_record):
@@ -225,13 +228,12 @@ def computer_move(shot_record):
                 on_target = "yes"
                 shot_record.append(player_turn)
                 break
-        except:
             print("Please re-enter new co-ordinates")
 
-    return player_turn,shot_record
+    return player_turn, shot_record
 
 
-def check_move(player_turn,enemy_fleet,hit,miss,missed):
+def check_move(player_turn, enemy_fleet, hit, miss, missed):
     """
     Function to check if a starfighter has been hit or missed
     """
@@ -247,7 +249,7 @@ def check_move(player_turn,enemy_fleet,hit,miss,missed):
     if missed == 1:
         miss.append(player_turn)
 
-    return enemy_fleet,hit,miss,missed
+    return enemy_fleet, hit, miss, missed
 
 
 # Test ran with consecutive shots
@@ -257,6 +259,7 @@ for i in range(60):
         player_turn, enemy_fleet, hit, miss
     )
     player_board(hit, miss)
+
 
 def player_move(shot_record):
     """
@@ -274,10 +277,11 @@ def player_move(shot_record):
             else:
                 on_target = "yes"
                 break
-        except:
+
             print("Please re-enter new co-ordinates")
 
     return player_turn
+
 
 def check_move(player_turn, enemy_fleet, hit, miss):
     """
@@ -302,16 +306,16 @@ hit = []
 miss = []
 shot_record = []
 
-#Enemy fleet of ships
-enemy_fleet = [enemy1,enemy2,enemy3,enemy4,enemy5,]
+# Enemy fleet of ships
+enemy_fleet = [enemy1, enemy2, enemy3, enemy4, enemy5]
 enemy1 = []
 enemy2 = []
 enemy3 = []
 enemy4 = []
 enemy5 = []
 
-#Player's fleet of ships
-player_fleet = [pilot1,pilot2,pilot3,pilot4,pilot5]
+# Player's fleet of ships
+player_fleet = [pilot1, pilot2, pilot3, pilot4, pilot5]
 pilot1 = []
 pilot2 = []
 pilot3 = []
@@ -320,8 +324,8 @@ pilot5 = []
 
 # Function calling
 
-#
-enemy_fleet,space_filled = create_fighters()
+# Creates enemy fleet
+enemy_fleet, space_filled = create_fighters(taken1)
 
 #
 player_board(space_filled, hit, miss)
@@ -339,7 +343,7 @@ player_turn, shot_record = computer_move(shot_record)
 for i in range(99):
 
     # Function to check for duplicate player shots
-    shot_record = hit + miss
+    shot_record1 = hit1 + miss1
 
     # Function to record players shot
     player_turn = player_move(shot_record)
@@ -360,7 +364,7 @@ player_board(hit, miss, missed)
 
 if len(enemy_fleet) < 1:
     print("Congratulations Admiral", username, "The enemy fleet has been destroyed")
-elif len(player_fleet) <1:
+elif len(player_fleet) < 1:
     print("The enemy has destroyed your fleet")
 
     print("End of Game, Thank You for playing")
