@@ -65,7 +65,7 @@ def get_fighters(starfighters, space_filled):
     return starfighter
 
 
-def create_f  leet(space_filled):
+def create_fleet(space_filled):
 
     """
     Creates and places the players fleet at random
@@ -79,7 +79,7 @@ def create_f  leet(space_filled):
 
     return starfighter
 
-  player_fleet = create_fleet
+player_fleet = create_fleet
 
 
 def create_fighters(space_filled):
@@ -120,7 +120,7 @@ for x in range(5):
     grid_rows = grid_rows + grid_space
     player_shot = player_shot + 1
 
-    print(x, " ", grid_rows, space_filled)
+print(x, " ", grid_rows, space_filled)
 
 # Opening message to the player
 print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
