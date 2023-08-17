@@ -119,7 +119,8 @@ for x in range(5):
 
     grid_rows = grid_rows + grid_space
     player_shot = player_shot + 1
-print(x, " ", grid_rows, space_filled)
+
+    print(x, " ", grid_rows, space_filled)
 
 # Opening message to the player
 print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
