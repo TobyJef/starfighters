@@ -1,5 +1,23 @@
 # Used for random number generation
 from random import randrange
+import re
+
+
+title = ("\n", "  ", "*" * 3, "Starfighters", "*" * 3, "\n")
+
+
+# Opening message to the player
+print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
+
+# Player name entry
+username = input("Please enter your name: \n")
+print("\n")
+print("Welcome, Admiral", username, "\n")
+print("Admiral", username, ",your fleet is in position and awaiting your command.", "\n" * 2,)
+
+# Gameboard key
+print("Key:", "\n", "H = Hit", "\n", "o = Miss", "\n", "* = Starfighter", "\n")
+
 
 
 def check_placement(fighter, space_filled):
@@ -100,7 +118,7 @@ def create_fighters(space_filled):
 
     return enemy_fleet, space_filled
 
-title = ("\n", "  ", "*" * 3, "Starfighters", "*" * 3, "\n")
+
 
 # Player shot counter
 player_shot = 0
@@ -117,17 +135,7 @@ for x in range(5):
 
 print(x, " ", grid_rows, space_filled)
 
-# Opening message to the player
-print("\n", "  ", "*" * 3, "Welcome to Starfighters", "*" * 3, "\n")
 
-# Player name entry
-username = input("Please enter your name: \n")
-print("\n")
-print("Welcome, Admiral", username, "\n")
-print("Admiral", username, ",your fleet is in position and awaiting your command.", "\n" * 2,)
-
-# Gameboard key
-print("Key:", "\n", "H = Hit", "\n", "o = Miss", "\n", "* = Starfighter", "\n")
 
 
 # Player's Gameboard and Shot Checks
@@ -139,7 +147,7 @@ def player_board(hit, miss):
     for x in range(5):
         grid_rows = ""
         for y in range(5):
-            grid_space = " _ "
+            grid_space = " ~ "
             # Hit, Miss markers
             if player_shot in miss:
                 grid_space = " M "
