@@ -1,10 +1,10 @@
 * Welcome to Starfighters
 
-Starfighters is a single player, turn based strategy game set in the depths of space. Take command as Admiral, your mission is to hunt down and destroy the opposing enemy fleet before the enemy can locate and destroy your own Starfighters.
+Starfighters is a single player, turn based strategy game set in the depths of space. Take command as Admiral of your fleet, with your mission to hunt down and destroy the opposing enemy fleet before the enemy can destroy your own fleet of Starfighters.
 
-The enemy Admiral has hidden their fleet within this star systems nebula cloud, and their precise location cannot be detected. but your scanners however can detect and return instances of any shots fired that have hit or missed their target.
+The enemy Admiral has hidden their fleet within this star systems nebula cloud, and their precise location cannot be detected. Your only hope is to map your shots onto your scanner and record your results of hits, misses and destroyed.
 
-Over the two game boards, use the tactical grids to record your shots on the enemy fleet, and the enemies attempt at your own Starfighters. All it takes is one direct hit to destroy a Starship, so speed an accuracy is of the most importance.
+Over the two game boards, use the tactical grids to record your shots on the enemy fleet, and the enemies attempts at your own Starfighters. All it takes is one direct hit to destroy a Starship, so speed and accuracy is of the most importance.
 
 Best of luck Admiral.
 
@@ -23,7 +23,7 @@ The classes of naval ships used in the original game were:
 - Submarine (3 grid spaces)
 - Destroyer (2 grid spaces)
 
-Due to different publications found of the game Battleships found around the word, ship names, ship and grid sizes can vary.
+Due to different publications found of the game Battleships found around the word, ship names, sizes and gameboards can vary.
 
 - More information on the game Battleships can be found at [link to wikipedia.com](https://en.wikipedia.org/wiki/Battleship_game)
 
@@ -42,9 +42,8 @@ It would be my intention in a future update to add a 10x10 grid. As discussed fu
 
 - Flow Diagram showing the intended flow of how the game would run from Start, to Finish.
 
-![Flow diagram Beginning](documentation/flow-diagram-start.webp)
-![Flow diagram Middle](documentation/flow-diagram-middle.webp)
-![Flow diagram End](documentation/flow-diagram-end.webp)
+![Flow diagram Beginning](documentation/flowchart.webp)
+
 
 - Future Improvements:
 
