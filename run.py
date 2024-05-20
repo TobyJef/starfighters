@@ -1,6 +1,6 @@
 # Used for random number generation
 from random import randrange
-import re
+
 
 
 title = ("\n", "  ", "*" * 3, "Starfighters", "*" * 3, "\n")
