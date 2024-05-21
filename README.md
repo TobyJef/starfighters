@@ -1,19 +1,22 @@
 * Welcome to Starfighters
 
-Starfighters is a single player, turn based strategy game set in the depths of space. Take command as Admiral of your fleet, with your mission to hunt down and destroy the opposing enemy fleet before the enemy can destroy your own fleet of Starfighters.
+Starfighters is a single player, turn based strategy game set in the depths of space. As Admiral, your mission is to discover and destroy the hidden enemy Starfighter fleet before your own fleet of five Starfighters is destroyed.
 
-The enemy Admiral has hidden their fleet within this star systems nebula cloud, and their precise location cannot be detected. Your only hope is to map your shots onto your scanner and record your results of hits, misses and destroyed.
-
-Over the two game boards, use the tactical grids to record your shots on the enemy fleet, and the enemies attempts at your own Starfighters. All it takes is one direct hit to destroy a Starship, so speed and accuracy is of the most importance.
+The enemy Admiral has hidden their fleet within this star systems nebula cloud, and their precise location cannot be detected. Your only hope is to map your shots onto your tactical display and record the results of shot co-ordinates, misses and destroyed Starfighters. All it takes is one direct hit to destroy a Starfighter, so speed and accuracy is of the most importance.
 
 Best of luck Admiral.
 
 
 ** How to Play
 
+This current version of Starfighters, is written using the Python programming language and using the imported Python module of random. Starfighters is a turn by turn,single player game which requires the player to input a guess against the Computers gameboard, with the desired result of destroying all their Starfighters. The player is given two gameboards which use a 5x5 grid, with the top left of the gameboard having an input of (0,0) and the final space in the lower right corner of the gameboard being (4,4). The top gameboard shows the players name and contains their Starfighters, whilst recording the outcome of the moves from the computer. The lower gameboard is the Computers Starfighters gameboard, this contains the computers hidden Starfighters and is where the player inputs are recorded. The resulting inputs from both the player and computer will result in one of two outcomes either a hit which will Destroy a Starfighter, or a Miss. With a miss having statistically a higher outcome in the earlier stages of the game as there are more empty spaces than spaces containing Starfighters.
+
+The game begins after the player has input their name, the game boards are created then using Pythons random module the players and computers Starfighters are placed at random over the two corresponding game boards which are then displayed to the player. The game will then ask the player to input their first guess and record the outcome. It is then passed over to the computer to do the same. This turn by turn process is repeated until either the players or computers five Starfighters have been destroyed. With the game finalising in a message to the player, if victory conditions for the player is met a congratulatory message is displayed, or a message of commiserations if the player is defeated by the computer. 
+
+
 - A brief History 
 
-Starships is a single player game based on the classic pen and paper game of Battleships. In the original Battleships game the player is given two 10x10 grids. The first grid is used for the placement of the players five Battleships of varying sizes, and to mark the opponents shots against the player's ships. The second grid is used to mark down the players shot against the enemy ships and to record the outcome of a players turn. Turns for both the player and their opponent will result in a shot either hitting or missing a ship or resulting in a Battleship being sunk. The size of the ship determines the required amount of hits before a Battleship is sunk.
+Starfighters is a single player game based on the classic pen and paper game of Battleships. In the original Battleships game the player is given two 10x10 grids. The first grid is used for the placement of the players five Battleships of varying sizes, and to mark the opponents shots against the player's ships. The second grid is used to mark down the players shot against the enemy ships and to record the outcome of a players turn. Turns for both the player and their opponent will result in a shot either hitting or missing a ship or resulting in a Battleship being sunk. The size of the ship determines the required amount of hits before a Battleship is sunk.
 
 The classes of naval ships used in the original game were:
 
@@ -23,21 +26,25 @@ The classes of naval ships used in the original game were:
 - Submarine (3 grid spaces)
 - Destroyer (2 grid spaces)
 
-Due to different publications found of the game Battleships found around the word, ship names, sizes and gameboards can vary.
+Due to different publications of the game Battleships found around the games name, ship names, sizes and gameboards can vary. But the overall objecting resulting in the same outcome.
 
 - More information on the game Battleships can be found at [link to wikipedia.com](https://en.wikipedia.org/wiki/Battleship_game)
 
-In my version Starfighters, the classic Naval game has been given a sci-fi twist, with a brief backstory and mission briefing to transport the player and game into the cosmos. 
-
-A 5x5 grid size is being used for the players and the opponents ship placements. With the same basic rules of the game apply, find and destroy the entire enemy fleet, before they to destroy yours. Both sets of Starfighters are placed on the grids at random. 
+In my version Starfighters, the classic Naval game has been given a sci-fi twist, transporting the game into the cosmos and setting the turn based action amongst the stars.
 
 ** Features
 
 - Game Design
 
-The classic grid design from the game Battleships was used. This allows for precise placement of Player and Computer Starfighters, and Player shot placement.
+The classic grid design from the game Battleships was used. This allows for clear placement of Starfighters, and the players shot placement.
 
-A 5x5 grid size allows for a decent sized game board to accomodate single grid space sized Starfighters.
+A 5x5 grid size allows for a decent sized game board to accomodate single space sized Starfighters.
+
+To help with player immersion instead of empty spaces on the gameboard, I have tried to recreate the stars using the asterisk key due its star shaped properties.
+
+A capitalised V was used as Starfighters, with the pilots cockpit being at the bottom of the V and the top of the V being front end of the craft.
+
+
 It would be my intention in a future update to add a 10x10 grid. As discussed further in the Future Improvement section.  
 
 - Flow Diagram showing the intended flow of how the game would run from Start, to Finish.

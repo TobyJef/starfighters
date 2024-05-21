@@ -311,8 +311,7 @@ def start_game():
 
     # Opening message to the player
     print("*" * 40)
-    print("Welcome to the Starfighters Tactical Display")
-    print("Welcome, Admiral" "\n")
+    print("Hello Admiral and welcome to the Starfighters Tactical Display")
     print("Your fleet is in position and awaiting your command.", "\n" * 2,)
     print(f"The tactical displays are 5x5, The number of enemy Starfighters is: {fighters}")
     print("The top left grid co-ordinate is (0, 0)")
