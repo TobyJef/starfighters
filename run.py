@@ -49,7 +49,7 @@ class GameBoard():
         self.num_of_fighters = num_of_fighters
         self.player_type = player_type
         self.player_name = player_name
-        self.guess = []
+        self.guesses = []
         self.fighters = []
         self.turns = turns
 
@@ -174,7 +174,7 @@ def validate_shots(gameboard):
     """
     while True:
         try:
-            if gameboard.player_type == "computer":
+            if gameboard.player_type == "Computer":
                 x = validate_input(gameboard, "row")
                 y = validate_input(gameboard, "column")
                 if (x, y) in gameboard.guesses:
@@ -186,7 +186,7 @@ def validate_shots(gameboard):
                     raise Duplicate_Shot
             return make_guess(gameboard, x, y), x, y
         except Duplicate_Shot:
-            if gameboard.player_type == "computer":
+            if gameboard.player_type == "Computer":
                 shot_error = ("You have already guessed those co-ordinates")
                 print(shot_error)
 
@@ -200,7 +200,7 @@ def calculate_score(turn, gameboard):
             scores[gameboard.player_name] += 1
             return scores
         else:
-            scores["computer"] += 1
+            scores["Computer"] += 1
             return scores
 
 
@@ -248,26 +248,26 @@ def play_game(players_board, computers_board):
     """
     Used for displaying the in game text and victory/loss messages
     """
-    while scores["computer"] or scores["players_board.player_name"] <= 4:
+    while scores["Computer"] or scores[players_board.player_name] <= 5:
         print(f"{players_board.player_name}. It is your turn to attack!")
         print("Prepare to enter the co-ordinates you would like to strike.")
         print("-" * 65)
-        players_turn, x, y = validate_input_coordinates(computers_board)
+        players_turn, x, y = validate_shots(computers_board)
 
         print("-" * 65)
         print(f"Shot fired!, target '{players_turn}' at co-ordinate{(x, y)}")
         calculate_score(players_turn, players_board)
-        if (scores[players_board.player_name] == 4):
+        if (scores[players_board.player_name] == 5):
             print()
             break
 
         print("-" * 65)
         print(f"It's now the {computers_board.player_name}'s turn to attack.")
-        computers_turn, x, y = validate_input_coordinates(players_board)
+        computers_turn, x, y = validate_shots(players_board)
         print("-" * 65)
         calculate_score(computers_turn, computers_board)
         print(f"Shot fired!, target '{computers_turn}' at co-ordinate{(x, y)}")
-        if (scores["computer"] == 4):
+        if (scores["Computer"] == 5):
             print()
             break
 
@@ -277,7 +277,7 @@ def play_game(players_board, computers_board):
         print()
 
     board_display(players_board, computers_board)
-    if scores[players_board.player_name] == 4:
+    if scores[players_board.player_name] == 5:
         print(f"Congratulations {players_board.player_name}! You won!")
         shots_fired_counter(computers_board)
     else:
@@ -303,19 +303,19 @@ def start_game():
     boardsize = 5
     fighters = 5
     players_name = check_username()
-    scores["computer"] = 0
-    scores["players_name"] = 0
+    scores["Computer"] = 0
+    scores[players_name] = 0
     turns = 0
     players_board = GameBoard(boardsize, fighters, "user", players_name, turns)
-    computer_board = GameBoard(boardsize, fighters, "computer",
+    computer_board = GameBoard(boardsize, fighters, "Computer",
                                "Computer", turns)
 
     # Opening message to the player
     print("*" * 40)
     print("Hello Admiral and welcome to the Starfighters Tactical Display")
     print("Your fleet is in position and awaiting your command.")
-    print(f"The tactical displays are 5x5,
-          The number of enemy Starfighters is 5")
+    print(f"The tactical displays are 5x5")
+    print("The number of enemy Starfighters is 5")
     print("The top left grid co-ordinate is (0, 0)")
     print("*" * 40)
 
