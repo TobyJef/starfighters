@@ -43,7 +43,7 @@ class GameBoard():
     def __init__(self, size, num_of_fighters, player_type, player_name, turns):
         self.size = size
         self.board_grid = [["*" for x in range(size)] for y in range(size)]
-        self.num_of_fighters = num_if_fighters
+        self.num_of_fighters = num_of_fighters
         self.player_type = player_type
         self.player_name = player_name
         self.guess = []
@@ -92,7 +92,7 @@ def random_number(boardsize):
     Helper function that creates a 
     random interger based on the boardsize
     """
-return int(random.randint(0, boardsize -1))
+    return int(random.randint(0, boardsize -1))
 
 
 def add_fighters(gameboard):
@@ -104,9 +104,9 @@ def add_fighters(gameboard):
     fighter_list = []
     empty_spaces = []
 
-    while len(empty_space) < num_of_fighters:
-        x = rand_num(gameboard.size)
-        y = rand_num(gameboard.size)
+    while len(empty_spaces) < num_of_fighters:
+        x = random_number(gameboard.size)
+        y = random_number(gameboard.size)
         fighter = (x, y)
         fighter_list.append(fighter)
         empty_spaces = set(fighter_list)
@@ -312,8 +312,8 @@ def start_game():
     # Opening message to the player
     print("*" * 40)
     print("Welcome to the Starfighters Tactical Display")
-    print("Welcome, Admiral", name, "\n")
-    print("Admiral", name, ",your fleet is in position and awaiting your command.", "\n" * 2,)
+    print("Welcome, Admiral" "\n")
+    print("Your fleet is in position and awaiting your command.", "\n" * 2,)
     print(f"The tactical displays are 5x5, The number of enemy Starfighters is: {fighters}")
     print("The top left grid co-ordinate is (0, 0)")
     print("*" * 40)
