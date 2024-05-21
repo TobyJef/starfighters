@@ -1,9 +1,225 @@
 # Used for random number generation
-from random import randrange
+import random
+
+#Global Variable
+scores = {"Computer": 0}
+
+class Duplicate_Shot(Exception):
+    """
+    Error message for instances of duplicate shots,
+    called by the player
+    """
 
 
+class Out_of_Bounds(Exception):
+    """
+    Error message for instances of guessed shots
+    that is outside of the gameboard
+    """
 
-title = ("\n", "  ", "*" * 3, "Starfighters", "*" * 3, "\n")
+
+class Negative_Input(Exception):
+    """
+    Error message for instances of guessed shots
+    with a negative value
+    """
+
+
+class No_Username(Exception):
+    """
+    Error message for when no name given at
+    user name input
+    """
+
+
+class GameBoard():
+    """
+    "*" = The Stars
+    "o" = Missed Shot
+    "#" = Destroyed Starfighter
+    "V" = Players Active Starfighters
+    """
+
+    def __init__(self, size, num_of_fighters, player_type, player_name, turns):
+        self.size = size
+        self.board_grid = [["*" for x in range(size)] for y in range(size)]
+        self.num_of_fighters = num_if_fighters
+        self.player_type = player_type
+        self.player_name = player_name
+        self.guess = []
+        self.fighters = []
+        self.turns = turns
+
+    
+    def display_board(self):
+        """
+        GameBoard column decoration
+        """
+        for row in self.board_grid:
+            print(" | ".join(row))
+
+    
+    def guess(self, x, y):
+        """
+        Missed Shots
+        """
+        self.guesses.append((x, y))
+        self.board_grid[x][y] = "o"
+        self.turns += 1
+
+        if (x, y) in self.fighters:
+            """
+            Destroyed Starfighters
+            """
+            self.board_grid[x][y] = "#"
+            return "Destroyed"
+        else:
+            return "Miss"
+
+
+    def display_fighters(self):
+        """
+        Players Starfighters
+        """
+        for co_ord in self.fighters:
+            x, y = co_ord
+            if self.player_type == "user":
+                self.board_grid[x][y] = "V"
+
+
+def random_number(boardsize):
+    """
+    Helper function that creates a 
+    random interger based on the boardsize
+    """
+return int(random.randint(0, boardsize -1))
+
+
+def add_fighters(gameboard):
+    """
+    Function to generate random Starfighter placement,
+    for both players and computers gameboard.
+    """
+    num_of_fighters = gameboard.num_of_fighters
+    fighter_list = []
+    empty_spaces = []
+
+    while len(empty_space) < num_of_fighters:
+        x = rand_num(gameboard.size)
+        y = rand_num(gameboard.size)
+        fighter = (x, y)
+        fighter_list.append(fighter)
+        empty_spaces = set(fighter_list)
+        gameboard.fighters = list(empty_spaces)
+        gameboard.display_fighters()
+
+
+def input_guess(boardsize, row_or_column):
+    """
+    Players Guess Input Prompt
+    """
+    text = ("Enter a number between 0 and ")
+    num = int(input(text + f'{boardsize - 1} for the {row_or_column}: \n'))
+    return num
+
+
+def make_guess(gameboard, x, y):
+    """
+    Stores Player Guess
+    """
+    return gameboard.guess(x, y)
+
+
+def validate_input(gameboard, row_or_column):
+    """
+    Checks the Players guessed shot to ensure they
+    fall within the Gameboards dimensions or contain
+    valid input
+    """
+    while True:
+        try:
+            num = input_guess(gameboard.size, row_or_column)
+            if num > gameboard.size - 1:
+                raise Out_of_Bounds
+            elif num  < 0:
+                raise Negative_Input
+            return num
+        except ValueError as error:
+            e = str(error).split()
+            print(f'{e[-1]} is not a valid input')
+        except Out_of_Bounds:
+            print("Sorry Admiral, We cannot fire there")
+        except Negative_Input:
+            print("Please enter a number between 0 and 4")
+
+
+def check_username():
+    """
+    Check to see if a proper username was provided,
+    at least one character is required.
+    """
+    while True:
+        try:
+            name = input("Please enter your name: ")
+            if len(name) == 0:
+                raise No_Username
+            return name
+        except No_Username:
+            print("Please enter a name")
+
+
+def validate_shots(gameboard):
+    """
+
+    """
+    while True:
+        try:
+            if gameboard.player_type == "computer":
+                x = validate_input(gameboard, "row")
+                y = validate_input(gameboard, "column")
+                if (x, y) in gameboard.guesses:
+                    raise Duplicate_Shot
+            else:
+                x = int(random_number(gameboard.size))
+                y = int(random_number(gameboard.size))
+                if (x, y) in gameboard.guesses:
+                    raise Duplicate_Shot
+            return make_guess(gameboard, x, y), x, y
+        except Duplicate_Shot:
+            if gameboard.player_type == "computer":
+                shot_error = ("You have already guessed those co-ordinates")
+                print(shot_error)
+
+
+def calculate_score(turn, gameboard):
+    """
+    Tracks the games and updates the scoreboard
+    """
+    if turn == "Destroyed":
+        if gameboard.player_type == "user":
+            scores[gameboard.player_name] += 1
+            return scores
+        else:
+            scores["computer"] += 1
+            return scores
+
+def shots_fired_counter(gameboard):
+    """
+    Tracks the total number of the players guesses until
+    the win condition is achieved
+    """
+    turns = gameboard.turns
+    print("\n")
+    print("-" * 40)
+    print("Congratulations Admiral. All enemy Starfighters were destroyed.")
+    print(f"Battle Analysis shows the enemy was defeated from {turns} shots")
+    print("\n")
+    if int(turns) < 5:
+        print("A Commendation awaits you Admiral, Well Done")
+    elif int(turns) < 10:
+        print("")
+
+
 
 
 # Opening message to the player
