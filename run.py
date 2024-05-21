@@ -1,8 +1,11 @@
 # Used for random number generation
 import random
 
-#Global Variable
+"""
+Global Variable
+"""
 scores = {"Computer": 0}
+
 
 class Duplicate_Shot(Exception):
     """
@@ -50,7 +53,6 @@ class GameBoard():
         self.fighters = []
         self.turns = turns
 
-    
     def display_board(self):
         """
         GameBoard column decoration
@@ -58,7 +60,6 @@ class GameBoard():
         for row in self.board_grid:
             print(" | ".join(row))
 
-    
     def guess(self, x, y):
         """
         Missed Shots
@@ -76,7 +77,6 @@ class GameBoard():
         else:
             return "Miss"
 
-
     def display_fighters(self):
         """
         Players Starfighters
@@ -89,10 +89,10 @@ class GameBoard():
 
 def random_number(boardsize):
     """
-    Helper function that creates a 
+    Helper function that creates a
     random interger based on the boardsize
     """
-    return int(random.randint(0, boardsize -1))
+    return int(random.randint(0, boardsize-1))
 
 
 def add_fighters(gameboard):
@@ -141,7 +141,7 @@ def validate_input(gameboard, row_or_column):
             num = input_guess(gameboard.size, row_or_column)
             if num > gameboard.size - 1:
                 raise Out_of_Bounds
-            elif num  < 0:
+            elif num < 0:
                 raise Negative_Input
             return num
         except ValueError as error:
@@ -225,8 +225,8 @@ def shots_fired_counter(gameboard):
     elif int(turns) < 20:
         print("A hard fought victory")
     else:
-         print("That was a close call Admiral, but a win is still a win")
-    print ("-" * 40)
+        print("That was a close call Admiral, but a win is still a win")
+    print("-" * 40)
 
 
 def board_display(players_board, computers_board):
@@ -259,7 +259,7 @@ def play_game(players_board, computers_board):
         calculate_score(players_turn, players_board)
         if (scores[players_board.player_name] == 4):
             print()
-            break        
+            break
 
         print("-" * 65)
         print(f"It's now the {computers_board.player_name}'s turn to attack.")
@@ -307,24 +307,28 @@ def start_game():
     scores["players_name"] = 0
     turns = 0
     players_board = GameBoard(boardsize, fighters, "user", players_name, turns)
-    computer_board = GameBoard(boardsize, fighters, "computer", "Computer", turns)
+    computer_board = GameBoard(boardsize, fighters, "computer",
+                               "Computer", turns)
 
     # Opening message to the player
     print("*" * 40)
     print("Hello Admiral and welcome to the Starfighters Tactical Display")
-    print("Your fleet is in position and awaiting your command.", "\n" * 2,)
-    print(f"The tactical displays are 5x5, The number of enemy Starfighters is: {fighters}")
+    print("Your fleet is in position and awaiting your command.")
+    print(f"The tactical displays are 5x5,
+          The number of enemy Starfighters is 5")
     print("The top left grid co-ordinate is (0, 0)")
     print("*" * 40)
 
     # Gameboard key
-    print("Key:", "\n", "* = Stars", "\n", "# = Destroyed Starfighter", "\n", "o = Miss", "\n", "V = Starfighter", "\n")
+    print("Key:", "\n", "* = Stars", "\n", "# = Destroyed Starfighter",
+          "\n", "o = Miss", "\n", "V = Starfighter", "\n")
 
     add_fighters(players_board)
     add_fighters(computer_board)
 
     board_display(players_board, computer_board)
     play_game(players_board, computer_board)
+
 
 print()
 print("-" * 65)
@@ -335,4 +339,3 @@ print("fleet is destroyed, leaving you defenceless!")
 print("-" * 65)
 print()
 start_game()
-

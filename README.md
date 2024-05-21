@@ -118,6 +118,10 @@ Also the larger sized Starfighter random placement, being placed outside of the 
 
 - PEP8
 
+All PEP8 checks passed via the CI Python Linter Checker
+
+![PEP8 CI Linter Check](documentation/pep8.webp)
+
 ** Deployement
 
 - Deployment to Heroku
