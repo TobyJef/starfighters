@@ -41,6 +41,8 @@ In my version Starfighters, the classic Naval game has been given a sci-fi twist
 
 The classic grid design from the game Battleships was used. This allows for clear placement of Starfighters, and recording the players shots. A 5x5 grid size allows for a decent sized game board to accomodate single space sized Starfighters.
 
+![Gameboard](documentation/tactical_display.webp)
+
 - In game Key:
         * = Stars (empty spaces)
         # = Destroyed Starfighters
@@ -54,6 +56,8 @@ A capitalised V was used as Starfighters, with the pilots cockpit imagned being 
 The Hashtag key (#) is used to symbolise the destruction of the Starfighters.
 
 A guess that has been registered as a Miss is displayed with a lower case O (o).
+
+![In game Key](documentation/gameboard_key.webp)
 
 - Future Improvements:
 
@@ -115,6 +119,9 @@ While in development of a previous version of Starfighters there had been issues
 Also the larger sized Starfighter random placement, being placed outside of the confines of the planned grid size, and the larger sized Starfighters also overlapping within the same grid space. The larger design Starfighters was eventually dropped from the current version of this game. But with a future plan to reintroduce them in a future release.
 
 - Remaining Bugs
+
+Although not code related, within the Gitpod terminal it displays a problem regarding the ms-python.debugpy extension. I did not have time to find a way to remove the issue, however I think it may be related with transferring over the workspace from CodeAnywhere to Gitpod.
+
 
 *** Validation
 
